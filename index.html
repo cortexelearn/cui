@@ -1,0 +1,1952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#1a1208" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="CUI Track" />
+  <meta name="description" content="CortexEdge CUI — Controlled Unclassified Information handling, transmission, and rules. An information-awareness course. Ad-free, offline-capable." />
+  <title>CortexEdge — Controlled Unclassified Information</title>
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="./icons/icon192.png" />
+  <link rel="apple-touch-icon" href="./icons/icon192.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;background:#1a1208;-webkit-text-size-adjust:100%;}
+    #root{min-height:100vh;}
+    ::-webkit-scrollbar{width:10px;height:10px;}
+    ::-webkit-scrollbar-track{background:#1a1208;}
+    ::-webkit-scrollbar-thumb{background:#3a2c1a;border-radius:5px;}
+    a{color:#e8a87c;}
+    @media print {
+      .cui-sidebar{display:none !important;}
+      body{background:#fff;}
+    }
+  </style>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function(){ navigator.serviceWorker.register('./sw.js').catch(function(){}); });
+    }
+  </script>
+  <script type="text/babel" data-presets="react">
+const CUI_LESSONS =
+[
+  {
+    phase: "Phase 1", phaseColor: "#c84b11",
+    title: "Welcome & Why CUI Exists",
+    subtitle: "Executive Order 13556, the problem CUI solved, NARA as the governing authority, and who is in scope. The legal-but-practical ground rules for this track.",
+    time: "30 min", type: "Foundations",
+    video: { id: "iHZBRxjJW4c", title: "CUI Overview in Under 5 Minutes (Cleared Systems)" },
+    content: [
+      { type: "p", text: "**Important framing before we begin.** This track is educational training, not legal or compliance advice. CUI rules carry real legal and contractual consequences, and the regulatory landscape is actively changing. Nothing here substitutes for your contract terms, your organization's security office, or a qualified compliance professional. Treat this as a map of the territory — then verify the specifics against authoritative sources and your own program before you act." },
+
+      { type: "p", text: "With that said: this track is for aerospace and defense engineers and staff who encounter Controlled Unclassified Information in their work but aren't compliance specialists. The goal is fluency — understanding what CUI is, how to handle it, how to transmit it, and what the rules require — so you can do your job without creating a compliance incident." },
+
+      { type: "h3", text: "The Problem CUI Solved" },
+
+      { type: "p", text: "For decades, federal agencies protected sensitive-but-unclassified information using a chaotic patchwork of agency-specific labels: 'For Official Use Only' (FOUO), 'Sensitive But Unclassified' (SBU), 'Law Enforcement Sensitive,' and dozens more. There were over 100 such markings across government, each with its own inconsistent rules. The result was confusion — information marked one way at one agency meant something different at another, and contractors couldn't reliably know how to protect what they received." },
+
+      { type: "p", text: "Controlled Unclassified Information was created to replace that patchwork with a single, standardized system. One framework, one set of rules, one registry of what counts and how to handle it." },
+
+      { type: "h3", text: "The Legal Foundation" },
+
+      { type: "p", text: "The CUI Program rests on a clear chain of authority:" },
+
+      { type: "ul", items: [
+        "**Executive Order 13556** (November 4, 2010) established the CUI Program for the entire executive branch and designated the National Archives and Records Administration (NARA) as the Executive Agent to implement and oversee it.",
+        "**32 CFR Part 2002** is the federal regulation that codified the program — the binding rulebook for marking, safeguarding, disseminating, decontrolling, and disposing of CUI. It was published in 2016.",
+        "**The CUI Registry** (maintained by NARA at archives.gov) is the authoritative public catalog of every approved CUI category and the specific handling rules each requires."
+      ]},
+
+      { type: "h3", text: "Who Is In Scope" },
+
+      { type: "p", text: "The program reaches far beyond government employees. 32 CFR 2002 applies to executive branch agencies, but it also reaches contractors who — in NARA's own words — collect, develop, receive, transmit, use, handle, or store CUI during contract performance. If your company performs work for a federal agency and touches CUI in the process, you are in scope. For the defense industrial base specifically, this is enforced through contract clauses (DFARS 252.204-7012) and, increasingly, the CMMC program — both covered later in this track." },
+
+      { type: "p", text: "The practical test: if information was created by or for the government, and a law, regulation, or government-wide policy requires it to be protected, and it came to you through your work — it's likely CUI, and these rules apply to you personally as the person handling it." },
+
+      { type: "h3", text: "Why This Matters in Aerospace" },
+
+      { type: "p", text: "Aerospace and defense work is saturated with CUI: controlled technical information (drawings, specifications, test data), export-controlled data, proprietary information shared under contract, and more. An engineer might touch CUI dozens of times a day without the dramatic feel of 'classified' material — which is exactly the risk. CUI mishandling rarely feels like a security breach in the moment; it feels like sending an email or saving a file. This track exists to make the rules second nature so the routine actions stay compliant." },
+
+      { type: "h3", text: "What This Track Covers" },
+
+      { type: "ul", items: [
+        "**Phase 1** (lessons 1–3): what CUI is — the registry, categories, and how CUI relates to classified information, FCI, ITAR/EAR, and proprietary data.",
+        "**Phase 2** (lessons 4–7): marking and handling — how to mark CUI correctly, the difference between CUI Basic and Specified, physical safeguarding, and the common mistakes to avoid.",
+        "**Phase 3** (lessons 8–11): transmission, storage, and systems — email and encryption rules, CUI on information systems, cloud/FedRAMP requirements, and incident reporting.",
+        "**Phase 4** (lessons 12–14): contractor obligations and the current landscape — CMMC in plain English, flow-down to subcontractors, and a capstone mapping a real CUI lifecycle."
+      ]},
+
+      { type: "p", text: "**A note on currency.** This material reflects the regulatory state as of early 2026. CUI rules are in active flux — the CMMC program is phasing in over several years, NIST SP 800-171 has a newer revision not yet enforced, and a government-wide FAR rule is still being finalized. Where timing matters, lessons say so. Always confirm current requirements against the regulation and your security office before relying on them." }
+    ],
+    quizzes: [
+      {
+        question: "What problem was the CUI Program created to solve?",
+        options: [
+          "A chaotic patchwork of inconsistent agency-specific labels (FOUO, SBU, and 100+ others) that made protecting sensitive-but-unclassified information confusing and unreliable across government",
+          "The need to classify more information at the Secret and Top Secret levels",
+          "The lack of any rules for protecting government information before 2010",
+          "The need to make all government information publicly available"
+        ],
+        correct: 0,
+        explanation: "Before CUI, agencies used over 100 inconsistent markings (FOUO, SBU, Law Enforcement Sensitive, etc.), each with its own rules. Information protected one way at one agency meant something different at another, and contractors couldn't reliably know how to handle what they received. CUI replaced that patchwork with one standardized framework, one set of rules, and one registry."
+      },
+      {
+        question: "Which entity is the designated Executive Agent responsible for implementing and overseeing the CUI Program?",
+        options: [
+          "The Department of Defense",
+          "The National Institute of Standards and Technology (NIST)",
+          "The National Archives and Records Administration (NARA)",
+          "The Cybersecurity and Infrastructure Security Agency (CISA)"
+        ],
+        correct: 2,
+        explanation: "Executive Order 13556 (2010) designated NARA as the Executive Agent for the CUI Program. NARA maintains the authoritative CUI Registry and the program is codified in 32 CFR Part 2002. DoD implements CUI requirements for its contractors via DFARS and CMMC, and NIST provides the technical safeguarding standard (800-171), but NARA governs the program itself."
+      },
+      {
+        question: "Under the program, when does a contractor become subject to CUI handling rules?",
+        options: [
+          "Only when the contractor holds a facility security clearance",
+          "Never — CUI rules apply only to federal government employees",
+          "Only after completing CMMC Level 3 certification",
+          "When the contractor collects, develops, receives, transmits, uses, handles, or stores CUI during contract performance"
+        ],
+        correct: 3,
+        explanation: "32 CFR 2002 reaches contractors who collect, develop, receive, transmit, use, handle, or store CUI during contract performance — not just government employees. If your company performs federal work and touches CUI, you are in scope, enforced through clauses like DFARS 252.204-7012 and, increasingly, CMMC. No clearance is required for information to be CUI."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 1", phaseColor: "#c84b11",
+    title: "The CUI Registry & Categories",
+    subtitle: "How CUI is organized. CUI Basic vs. CUI Specified, reading the NARA registry, and the categories most relevant to aerospace work.",
+    time: "35 min", type: "Foundations",
+    video: { id: "Rz-g8Q4_WU8", title: "Real Examples of CUI: CAD Files, Specs & Drawings (Secure-Centric)" },
+    content: [
+      { type: "p", text: "CUI is not one undifferentiated bucket. It's organized into defined categories, each tied to the law, regulation, or government-wide policy that authorizes its control. Understanding this structure is what lets you answer the two questions that matter for any piece of information: is this CUI, and if so, what rules apply to it?" },
+
+      { type: "h3", text: "The CUI Registry" },
+
+      { type: "p", text: "NARA maintains the CUI Registry as the single authoritative public source (at archives.gov/cui). It lists every approved CUI category, organized into groupings such as Defense, Export Control, Financial, Privacy, Proprietary Business Information, and more. For each category the registry gives the authorizing basis, the marking, and any specific handling requirements. The critical principle: if a category isn't in the registry, it isn't CUI. Agencies cannot invent new control categories on their own — the registry is the closed, governing list." },
+
+      { type: "h3", text: "CUI Basic vs. CUI Specified" },
+
+      { type: "p", text: "Every CUI category is one of two types, and the distinction drives how you handle it:" },
+
+      { type: "ul", items: [
+        "**CUI Basic** — the default. The authorizing law or regulation requires the information to be protected but does NOT spell out specific handling controls. For CUI Basic, you apply the uniform baseline safeguarding and dissemination rules from 32 CFR 2002.",
+        "**CUI Specified** — the higher-specificity type. The authorizing law or regulation lays out particular handling requirements that go beyond (or differ from) the baseline. For CUI Specified, you must follow those specific controls, which the registry points you to."
+      ]},
+
+      { type: "p", text: "The practical rule: CUI Basic gets the standard baseline; CUI Specified gets whatever the underlying authority demands. You determine which type applies by checking the category in the registry. Mistaking Specified for Basic — and applying only the baseline when stricter controls were required — is a common and serious handling error." },
+
+      { type: "h3", text: "Categories Most Relevant to Aerospace" },
+
+      { type: "p", text: "While the registry is broad, a handful of categories dominate aerospace and defense work:" },
+
+      { type: "ul", items: [
+        "**Controlled Technical Information (CTI)** — technical data with military or space application: engineering drawings, specifications, standards, process sheets, test and evaluation data. This is the bread-and-butter CUI of an aerospace engineering organization.",
+        "**Export Controlled** — information whose export is restricted under the ITAR or EAR. Note this category sits at the intersection of CUI and export control law — both regimes apply simultaneously (covered more in the next lesson).",
+        "**Proprietary Business Information** — confidential commercial or financial information provided to or generated for the government.",
+        "**Privacy / PII** — personally identifiable information about individuals, where applicable."
+      ]},
+
+      { type: "h3", text: "Determining the Category Is the Government's Job — Usually" },
+
+      { type: "p", text: "An important nuance: the authority to designate information as CUI generally rests with the government (the agency or the originating authority). As a contractor, you typically receive information that is already designated and marked, and your job is to handle it according to that designation. You don't usually get to decide on your own that something is or isn't CUI. When you create information on behalf of the government under a contract, designation flows from the contract and the agency's guidance — when in doubt, ask the contracting officer or your security office, never guess." },
+
+      { type: "h3", text: "The Mental Model" },
+
+      { type: "p", text: "Think of the registry as the master rulebook: every category of CUI is a chapter, each chapter tells you whether it's Basic or Specified and what protections apply. When CUI lands on your desk, the workflow is: identify the category (usually from the marking), look it up if unsure, determine Basic vs. Specified, and apply the corresponding rules. The next lessons turn each of those steps into concrete practice." }
+    ],
+    quizzes: [
+      {
+        question: "What is the defining difference between CUI Basic and CUI Specified?",
+        options: [
+          "CUI Basic is unclassified while CUI Specified is classified",
+          "CUI Basic follows the uniform baseline safeguarding rules from 32 CFR 2002; CUI Specified has particular handling requirements spelled out by its authorizing law or regulation that go beyond or differ from the baseline",
+          "CUI Basic applies to contractors and CUI Specified applies only to the government",
+          "CUI Basic is temporary while CUI Specified is permanent"
+        ],
+        correct: 1,
+        explanation: "Both are unclassified. The difference is specificity of controls: CUI Basic gets the standard baseline (the authorizing authority requires protection but doesn't dictate specific controls), while CUI Specified must follow the particular controls its authorizing law/regulation prescribes. Applying only the baseline to something that was actually Specified is a serious and common handling error."
+      },
+      {
+        question: "An agency wants to create a brand-new control category for some sensitive information not listed in the CUI Registry. Under the program, can it?",
+        options: [
+          "Yes, any agency can define its own CUI categories as needed",
+          "Yes, but only with DoD approval",
+          "No — the NARA CUI Registry is the closed, authoritative list of approved categories; if a category isn't in the registry, it isn't CUI",
+          "Only if the information relates to national defense"
+        ],
+        correct: 2,
+        explanation: "The registry is the governing, closed list. Agencies cannot invent their own control categories — that was precisely the pre-CUI problem (100+ ad hoc markings). If a category isn't in the NARA registry, it isn't CUI. This is what makes the program standardized and reliable across government."
+      },
+      {
+        question: "Which CUI category is the everyday 'bread and butter' of an aerospace engineering organization?",
+        options: [
+          "Controlled Technical Information (CTI) — technical data with military or space application such as drawings, specifications, and test data",
+          "Privacy / PII",
+          "Financial Records",
+          "Law Enforcement Sensitive"
+        ],
+        correct: 0,
+        explanation: "Controlled Technical Information covers technical data with military or space application — engineering drawings, specifications, standards, process sheets, and test/evaluation data — which is exactly what aerospace engineering organizations generate and exchange constantly. Export Controlled and Proprietary Business Information are also common, but CTI is the dominant day-to-day category."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 1", phaseColor: "#c84b11",
+    title: "CUI vs. Everything Else",
+    subtitle: "How CUI relates to and differs from classified information, Federal Contract Information (FCI), ITAR/EAR export-controlled data, and ordinary proprietary information.",
+    time: "35 min", type: "Foundations",
+    video: { id: "twdT23DUWAw", title: "Controlled Unclassified Information (CUI) — KNOW YOUR DATA! (CastleLock)" },
+    content: [
+      { type: "p", text: "The single biggest source of confusion in this area is mixing up CUI with the several adjacent categories of protected information. Each has its own rules, and they overlap in ways that trip people up. This lesson draws the boundaries clearly." },
+
+      { type: "h3", text: "CUI vs. Classified Information" },
+
+      { type: "p", text: "This is the most important distinction. **CUI is unclassified.** It is sensitive and controlled, but it is not Confidential, Secret, or Top Secret. The two systems are entirely separate:" },
+
+      { type: "ul", items: [
+        "**Classified information** is governed by a different legal regime (Executive Order 13526), requires security clearances for access, demands accredited facilities and systems, and carries criminal penalties under espionage statutes for mishandling.",
+        "**CUI** requires no clearance, can be handled on properly-secured business systems, and is protected through the 32 CFR 2002 framework. Mishandling has serious contractual and potentially legal consequences, but it is not the same regime as classified spillage."
+      ]},
+
+      { type: "p", text: "A frequent and dangerous error is treating CUI casually because 'it's only unclassified.' Unclassified does not mean unprotected — it means a different, still-mandatory, set of protections." },
+
+      { type: "h3", text: "CUI vs. FCI (Federal Contract Information)" },
+
+      { type: "p", text: "FCI and CUI are often mentioned together (especially in CMMC), so the difference matters:" },
+
+      { type: "ul", items: [
+        "**FCI (Federal Contract Information)** is information provided by or generated for the government under a contract that is not intended for public release — but it is the broader, lower-sensitivity tier. Basic safeguarding applies (the 15 requirements in FAR 52.204-21).",
+        "**CUI** is the more sensitive tier, requiring the fuller protections of NIST SP 800-171 (110 controls in the enforced revision).",
+        "**The relationship:** all CUI is sensitive enough to also be FCI-like in nature, but not all FCI rises to CUI. Think of FCI as the broad floor and CUI as the elevated tier within it that demands more."
+      ]},
+
+      { type: "h3", text: "CUI vs. ITAR/EAR Export-Controlled Data" },
+
+      { type: "p", text: "This is the overlap aerospace engineers most need to understand. Export-controlled technical data (under the ITAR or EAR) is ALSO a CUI category ('Export Controlled'). The two regimes apply at the same time:" },
+
+      { type: "ul", items: [
+        "**Export control law (ITAR/EAR)** restricts who may access the data based on nationality and location — the core concern is preventing access by foreign persons or export outside authorized destinations. Violations carry severe criminal and civil penalties.",
+        "**CUI rules** govern how the information is marked, safeguarded, and handled as controlled information.",
+        "**Both apply together:** export-controlled technical data must be handled per CUI safeguarding rules AND per export-control access restrictions. Satisfying one does not satisfy the other. An aerospace engineer handling an export-controlled drawing must protect it as CUI and ensure no unauthorized foreign-person access."
+      ]},
+
+      { type: "h3", text: "CUI vs. Ordinary Proprietary Information" },
+
+      { type: "p", text: "Companies have plenty of confidential information — trade secrets, internal financials, business plans — that is proprietary but NOT CUI. The distinguishing factor is government nexus: CUI is information the government created or possesses, or that an entity created or possesses for or on behalf of the government, that a law/regulation/government-wide policy requires to be controlled. Your company's internal pricing strategy is proprietary but not CUI. A proprietary technical report you generated under a government contract that the contract designates as controlled may well be CUI. The trigger is the government relationship plus an authorizing basis, not mere confidentiality." },
+
+      { type: "h3", text: "A Quick Reference" },
+
+      { type: "table", headers: ["Type", "Clearance needed?", "Governing framework", "Key concern"],
+        rows: [
+          ["Classified", "Yes", "EO 13526", "National security; criminal penalties"],
+          ["CUI", "No", "32 CFR 2002 / NIST 800-171", "Standardized control of sensitive unclassified info"],
+          ["FCI", "No", "FAR 52.204-21 (basic safeguarding)", "Non-public contract info, broad floor"],
+          ["ITAR/EAR data", "No (but access-restricted)", "ITAR / EAR (+ CUI rules)", "Foreign-person access & export"],
+          ["Proprietary (non-gov)", "No", "Company policy / NDA", "Business confidentiality, no gov nexus"]
+        ]
+      },
+
+      { type: "p", text: "The takeaway: when information lands on your desk, the question isn't just 'is this sensitive?' but 'which regime (or regimes) governs it?' Export-controlled CUI answers 'two at once.' Getting this right determines which rules you apply — and the rest of this track assumes you can place a given piece of information in the correct bucket." }
+    ],
+    quizzes: [
+      {
+        question: "Why is it dangerous to treat CUI casually on the grounds that 'it's only unclassified'?",
+        options: [
+          "Because CUI is actually a level of classified information",
+          "Because CUI requires a security clearance to access",
+          "Because all CUI automatically becomes classified after 90 days",
+          "Because unclassified does not mean unprotected — CUI carries a different but still-mandatory set of protections under 32 CFR 2002, with serious contractual and potential legal consequences for mishandling"
+        ],
+        correct: 3,
+        explanation: "CUI is genuinely unclassified — no clearance needed, handled on secured business systems — but 'unclassified' means a different mandatory protection regime, not the absence of one. Treating it casually because it isn't Secret is a frequent and dangerous error; mishandling has real contractual and potential legal consequences."
+      },
+      {
+        question: "An aerospace engineer is handling an engineering drawing that is export-controlled under ITAR. Which rules apply?",
+        options: [
+          "Only ITAR export-control rules, since those are stricter",
+          "Both simultaneously — it must be safeguarded per CUI rules AND access-restricted per ITAR; satisfying one does not satisfy the other",
+          "Only CUI safeguarding rules, since Export Controlled is a CUI category",
+          "Neither, because drawings are exempt from both regimes"
+        ],
+        correct: 1,
+        explanation: "Export-controlled technical data is both a CUI category ('Export Controlled') and subject to export-control law. The two regimes apply at the same time: CUI rules govern marking and safeguarding, while ITAR/EAR restrict foreign-person access and export. Meeting CUI safeguarding does not satisfy the export-control access restrictions, and vice versa."
+      },
+      {
+        question: "What distinguishes CUI from a company's ordinary proprietary information?",
+        options: [
+          "CUI is always more valuable than proprietary information",
+          "There is no difference; the terms are interchangeable",
+          "Proprietary information requires encryption and CUI does not",
+          "The government nexus — CUI is created or possessed by or for the government and a law/regulation/government-wide policy requires its control; ordinary proprietary info (e.g., internal pricing strategy) lacks that authorizing basis"
+        ],
+        correct: 3,
+        explanation: "Confidentiality alone doesn't make information CUI. The trigger is the government relationship plus an authorizing law/regulation/policy requiring control. A company's internal pricing strategy is proprietary but not CUI; a technical report generated under a government contract and designated as controlled may well be CUI. Government nexus and authorizing basis are the distinguishing factors."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 1", phaseColor: "#c84b11",
+    title: "Export-Controlled CUI: When Two Regimes Collide",
+    subtitle: "The high-stakes intersection where CUI and export control (ITAR/EAR) apply at once. Deemed exports, foreign-person access, and why safeguarding alone isn't enough.",
+    time: "35 min", type: "Foundations",
+    video: null,
+    resource: { type: "reference", items: [
+      { label: "NARA CUI Registry — category list (incl. Export Control)", url: "https://www.archives.gov/cui/registry/category-list" },
+      { label: "ITAR (22 CFR 120–130) — State Dept. DDTC", url: "https://www.pmddtc.state.gov/" },
+      { label: "EAR (15 CFR 730–774) — Commerce Dept. BIS", url: "https://www.bis.gov/" }
+    ], expansion: "Export-controlled CUI is governed by two regimes at once. The **CUI framework** (32 CFR 2002, NIST 800-171) controls how the data is marked and safeguarded; **export-control law** (ITAR for defense articles on the U.S. Munitions List, EAR for dual-use items on the Commerce Control List) controls *who* may access it and *where* it may go. The registry's Export Control category is the CUI side; the DDTC (ITAR) and BIS (EAR) resources are the export side. Remember the deemed-export rule: releasing controlled technical data to a foreign person — even inside the U.S. — is treated as an export, and need-to-know never overrides authorized-person status. When both apply, you must satisfy both; verify any specific access question with your export-control officer." },
+    content: [
+      { type: "p", text: "The previous lesson established that some CUI is also export-controlled, and that when it is, two regimes apply simultaneously. This lesson goes deep on that intersection — because for aerospace and defense work it's the single highest-stakes handling scenario, and the place where a well-intentioned engineer can commit a serious violation without ever 'leaking' anything in the conventional sense." },
+
+      { type: "p", text: "**The same framing applies as the rest of this track: this is training, not legal advice.** Export control violations carry severe criminal and civil penalties, and the rules are genuinely complex. Nothing here substitutes for your export-control officer, your Technology Control Plan, or qualified counsel. Treat this as orientation — then verify every real situation with the people whose job it is to know." },
+
+      { type: "h3", text: "Two Regimes, One Document" },
+
+      { type: "p", text: "Export-controlled technical data is governed by two separate legal frameworks that happen to land on the same document at the same time:" },
+
+      { type: "ul", items: [
+        "**The CUI framework** (32 CFR 2002, NIST 800-171) governs how the information is marked, safeguarded, stored, and transmitted as controlled information — the focus of this whole track.",
+        "**Export control law** governs WHO may access it and WHERE it may go, based on the nature of the data and the nationality/location of the recipient. The two main regimes are the **ITAR** (International Traffic in Arms Regulations, administered by the State Department, covering defense articles and defense-related technical data on the U.S. Munitions List) and the **EAR** (Export Administration Regulations, administered by the Commerce Department, covering dual-use items on the Commerce Control List)."
+      ]},
+
+      { type: "p", text: "The critical mental shift: CUI rules are about *protecting* the information; export rules are about *who is allowed to receive* it. You can perfectly satisfy every CUI safeguarding rule — encrypt it, store it in an authorized system, mark it correctly — and still commit an export violation by letting the wrong person access it. Safeguarding and access-authorization are different questions, and export-controlled CUI demands both." },
+
+      { type: "h3", text: "The Deemed Export — The Concept That Trips Everyone" },
+
+      { type: "p", text: "The most counterintuitive and most violated concept is the **deemed export**. Under export control law, releasing controlled technical data to a foreign person — even inside the United States, even inside your own facility — is 'deemed' to be an export to that person's home country. You don't have to ship anything overseas. Showing an ITAR-controlled drawing to a foreign-national colleague standing next to you in a U.S. office is, in the eyes of the law, an export to their country of nationality." },
+
+      { type: "ul", items: [
+        "**Why it matters so much in aerospace:** engineering teams are international. A brilliant colleague who is a foreign national, a visiting engineer, a partner-company employee — granting any of them access to export-controlled technical data without proper authorization (a license or a recognized exemption) can be a violation, regardless of how much you trust them or how clear their need-to-know is.",
+        "**Need-to-know does NOT override export control.** This is the trap. CUI handling says 'share with those who have a need to know.' Export control says 'and ONLY if they are also authorized persons under the export regime.' Both conditions must be met. A foreign-national colleague can have a genuine need-to-know and still be barred from access by export law.",
+        "**It applies to access, not just transfer.** Letting a foreign person view a screen, overhear a technical discussion, or have admin access to a system containing controlled data can all constitute deemed exports."
+      ]},
+
+      { type: "h3", text: "ITAR vs. EAR — A Brief Orientation" },
+
+      { type: "p", text: "You don't need to be an export-control expert to handle this responsibly, but knowing the basic distinction helps you recognize when to escalate:" },
+
+      { type: "ul", items: [
+        "**ITAR** covers defense articles and defense technical data — things designed or modified for military application, listed on the U.S. Munitions List. The controls are strict and the default assumption for foreign-person access is 'not without a license.' Much aerospace/defense technical data falls here.",
+        "**EAR** covers dual-use items — commercial items with potential military application, on the Commerce Control List, classified by ECCN (Export Control Classification Number). Controls vary by item and destination; some require licenses, some don't, depending on the country and end-use.",
+        "**The practical point:** you usually won't determine ITAR vs. EAR jurisdiction yourself — that's a determination made by your export-control function. Your job is to recognize that a document is export-controlled (the marking, e.g., 'CUI//SP-EXPT', or an ITAR/EAR notice tells you) and to apply the access restrictions accordingly, escalating any question about a specific person's authorization."
+      ]},
+
+      { type: "h3", text: "Handling Export-Controlled CUI in Practice" },
+
+      { type: "p", text: "Bringing CUI discipline and export discipline together, the handling rules for export-controlled CUI are the CUI rules PLUS:" },
+
+      { type: "ul", items: [
+        "**Verify authorized-person status before granting access** — not just need-to-know, but confirmed authorization under the export regime. When in doubt about a specific individual (especially foreign nationals, dual nationals, or external partners), stop and ask your export-control officer BEFORE granting access.",
+        "**Mind the access surface** — screens visible to others, shared systems, cloud regions with foreign-administered infrastructure, technical discussions in mixed company. The higher cloud tiers (e.g., the more restricted government/defense tiers from the cloud lesson) exist precisely to ensure data residency and U.S.-person administration for this kind of data.",
+        "**Transmission gets the export overlay too** — sending export-controlled CUI to a recipient abroad, or to a foreign person anywhere, is an export. Authorized channel + encryption (the CUI rules) is necessary but not sufficient; the recipient must also be authorized to receive it under export law.",
+        "**Know your Technology Control Plan (TCP)** — organizations handling export-controlled data typically maintain a TCP defining who may access what and how it's segregated. If your organization has one, it governs; know it and follow it."
+      ]},
+
+      { type: "h3", text: "The One Thing to Remember" },
+
+      { type: "p", text: "If you take away a single principle: **for export-controlled CUI, satisfying the CUI safeguarding rules is only half the job — you must also confirm the recipient is an authorized person under export law, and need-to-know never overrides that.** The dangerous failure here isn't the dramatic leak; it's the routine, well-meaning act of including a trusted foreign-national colleague on a drawing they had every business reason to see — and no legal authorization to receive. When export-controlled markings are present, the reflex must be: protect it as CUI, AND verify authorization before anyone accesses it. When unsure, the answer is always to ask your export-control officer before acting, not after." }
+    ],
+    quizzes: [
+      {
+        question: "For export-controlled CUI, why is satisfying all the CUI safeguarding rules not enough?",
+        options: [
+          "Because CUI rules govern how the information is protected, while export law separately governs WHO may access it — you must satisfy both, and proper safeguarding doesn't authorize access by an unauthorized person",
+          "Because CUI rules don't apply to export-controlled data",
+          "Because export-controlled data must also be classified",
+          "Because safeguarding rules are optional for export-controlled CUI"
+        ],
+        correct: 0,
+        explanation: "CUI rules and export rules answer different questions: protection vs. authorization-to-receive. You can encrypt, store, and mark export-controlled CUI perfectly and still commit an export violation by granting access to an unauthorized person. Both regimes apply simultaneously and both must be satisfied."
+      },
+      {
+        question: "What is a 'deemed export'?",
+        options: [
+          "An export that was estimated rather than measured",
+          "An export that has been approved by Customs",
+          "Releasing controlled technical data to a foreign person — even inside the U.S. or inside your own facility — which is treated as an export to that person's country of nationality",
+          "The shipment of a physical defense article overseas"
+        ],
+        correct: 2,
+        explanation: "A deemed export is the release of controlled technical data to a foreign person, regardless of physical location — showing an ITAR-controlled drawing to a foreign-national colleague in a U.S. office is 'deemed' an export to their home country. No physical shipment is required; access itself can be the violation."
+      },
+      {
+        question: "A foreign-national colleague has a clear, legitimate need-to-know for an ITAR-controlled drawing. Can they access it?",
+        options: [
+          "Yes — need-to-know is the governing standard for all controlled information",
+          "Yes, because internal colleagues are automatically authorized",
+          "Yes, as long as the drawing is encrypted first",
+          "Not on need-to-know alone — export law requires they also be an authorized person (via license or recognized exemption); need-to-know never overrides the export-control access restriction"
+        ],
+        correct: 3,
+        explanation: "This is the central trap. CUI handling says share with those who need to know; export control adds 'and only if they're also an authorized person under the regime.' Both conditions must be met. A foreign national can have genuine need-to-know and still be barred by export law absent a license or exemption — verify with the export-control officer before granting access."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 2", phaseColor: "#1c4a7a",
+    title: "Marking Basics",
+    subtitle: "What a compliant CUI marking looks like: the banner, category markings, the designation indicator, and limited-dissemination controls.",
+    time: "35 min", type: "Marking & Handling",
+    video: { id: "UxpF21AsxZE", title: "Controlled Unclassified Information — Introduction to Marking (US National Archives)" },
+    content: [
+      { type: "p", text: "Marking is how CUI announces itself. A correct marking tells every subsequent handler exactly what they're holding and how to treat it. Incorrect or missing markings are among the most common compliance failures — and because markings drive handling, a marking error cascades into handling errors. This lesson covers what a compliant marking looks like." },
+
+      { type: "h3", text: "The CUI Banner Marking" },
+
+      { type: "p", text: "The most visible element is the **banner marking**, which appears at the top (and bottom) of each page containing CUI. At minimum it contains the control marking 'CUI' (or the full 'CONTROLLED UNCLASSIFIED INFORMATION'). For CUI Specified, the banner extends to show more:" },
+
+      { type: "ul", items: [
+        "**The CUI control marking** — 'CUI' at minimum.",
+        "**Category or subcategory markings** — for CUI Specified, the relevant category markings follow the control marking, separated by double forward slashes (e.g., 'CUI//SP-CTI' for Specified Controlled Technical Information). The registry provides the correct category abbreviations.",
+        "**Limited-dissemination controls** — if dissemination is restricted, the applicable control markings appear as well, also set off by double slashes."
+      ]},
+
+      { type: "p", text: "A simple CUI Basic document may carry just 'CUI' as its banner. A CUI Specified document carries the fuller string. The banner is the at-a-glance signal; getting it right is the foundation of everything downstream." },
+
+      { type: "h3", text: "The Designation Indicator" },
+
+      { type: "p", text: "Every CUI document must also carry a **designation indicator** — information identifying who designated the CUI and providing a point of contact. This is typically a block on the first page identifying the controlling agency or office. Its purpose is accountability and traceability: anyone holding the document can determine where the control originated and whom to contact with questions about its handling or potential decontrol." },
+
+      { type: "h3", text: "Portion Marking" },
+
+      { type: "p", text: "Unlike classified information (where portion marking each paragraph is mandatory), CUI portion marking is generally permitted but not required by default — though specific agencies or contracts may require it. When used, individual portions (paragraphs, sections) are marked to show which contain CUI and which don't, helpful when a document mixes controlled and non-controlled content. Follow your contract and agency guidance on whether portion marking is expected." },
+
+      { type: "h3", text: "Why Marking Drives Everything" },
+
+      { type: "p", text: "The reason marking matters so much: the marking is the instruction set for every handler who touches the document next. A drawing marked 'CUI//SP-EXPT' tells the next engineer it's export-controlled CUI Specified, triggering both the safeguarding rules and the foreign-person access restrictions. If that same drawing is unmarked, the next handler may treat it as ordinary information and email it to an overseas supplier — a serious incident that traces directly back to a marking failure. Marking is not bureaucratic box-checking; it's the mechanism that makes correct handling possible." },
+
+      { type: "h3", text: "Common Marking Errors (Preview)" },
+
+      { type: "p", text: "We cover handling mistakes in depth in Lesson 8, but the marking-specific ones to internalize now: omitting the banner entirely; marking CUI Basic when the content is actually Specified (under-marking); failing to include the designation indicator; and inconsistent marking across pages of a multi-page document. Each of these breaks the instruction set that downstream handlers rely on." },
+
+      { type: "p", text: "**A practical caution:** as a contractor you usually receive already-marked CUI, and your job is to preserve and respect those markings — never strip or alter them. When you generate new documents containing CUI (derived from marked material or created under contract), you become responsible for marking them correctly, following the source material's markings and your contract/agency guidance. When unsure how to mark something you've created, ask your security office before releasing it." }
+    ],
+    quizzes: [
+      {
+        question: "What does the CUI banner marking at minimum contain, and where does it appear?",
+        options: [
+          "The control marking 'CUI' (or 'CONTROLLED UNCLASSIFIED INFORMATION'), appearing at the top and bottom of each page containing CUI",
+          "The author's name, appearing only on the last page",
+          "A classification level such as 'Secret', appearing in the center of each page",
+          "The contract number, appearing only on the cover"
+        ],
+        correct: 0,
+        explanation: "The banner marking carries the control marking 'CUI' at minimum, at the top and bottom of each page containing CUI. For CUI Specified it extends with category markings (e.g., 'CUI//SP-CTI') and any limited-dissemination controls, set off by double forward slashes. It's the at-a-glance signal that drives all downstream handling."
+      },
+      {
+        question: "What is the purpose of the designation indicator on a CUI document?",
+        options: [
+          "To state the document's expiration date",
+          "To identify who designated the CUI and provide a point of contact, enabling accountability and traceability about its handling or decontrol",
+          "To list everyone authorized to read the document",
+          "To indicate the document's classification level"
+        ],
+        correct: 1,
+        explanation: "The designation indicator identifies the designating agency/office and provides a point of contact. Its purpose is accountability and traceability — anyone holding the document can determine where the control originated and whom to contact with handling or decontrol questions."
+      },
+      {
+        question: "As a contractor who receives already-marked CUI, what is your responsibility regarding those markings?",
+        options: [
+          "Strip the markings to simplify the document for internal use",
+          "Replace all markings with your company's own labeling scheme",
+          "Preserve and respect the existing markings — never strip or alter them — and when creating new CUI documents, mark them correctly per the source material and contract/agency guidance",
+          "Markings only matter to the government, so contractors can ignore them"
+        ],
+        correct: 2,
+        explanation: "Contractors usually receive already-marked CUI and must preserve and respect those markings, never stripping or altering them. When generating new documents containing CUI, you become responsible for marking them correctly per the source markings and your contract/agency guidance — and should ask your security office when unsure."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 2", phaseColor: "#1c4a7a",
+    title: "CUI Basic vs. Specified Handling",
+    subtitle: "How handling rules differ between the two types, where to find the controls for a given category, and how CUI gets decontrolled.",
+    time: "35 min", type: "Marking & Handling",
+    video: { id: "yfzi-WzrEOc", title: "CUI Masterclass with Ryan Bonner (GRC Academy) — safeguarding & handling" },
+    content: [
+      { type: "p", text: "Lesson 2 introduced the Basic vs. Specified distinction at the category level. This lesson is about what it means for your actual handling — what you do differently depending on which type you're holding, and how CUI eventually stops being CUI." },
+
+      { type: "h3", text: "Handling CUI Basic" },
+
+      { type: "p", text: "CUI Basic follows the uniform baseline established in 32 CFR 2002. The core baseline expectations:" },
+
+      { type: "ul", items: [
+        "**Access on a lawful-government-purpose, need-to-know basis** — you may grant access to those who need it to perform authorized functions, without requiring approval from the originating agency for routine dissemination within authorized channels.",
+        "**Reasonable safeguarding** — protect it from unauthorized access at a level commensurate with the risk, both physically and on information systems (the system requirements come from NIST SP 800-171, covered in Phase 3).",
+        "**Marked, transmitted, and destroyed** per the baseline rules covered across this track."
+      ]},
+
+      { type: "p", text: "CUI Basic is the 'default operating mode' — apply the standard rules consistently and you're handling it correctly." },
+
+      { type: "h3", text: "Handling CUI Specified" },
+
+      { type: "p", text: "CUI Specified requires you to go beyond the baseline and apply the specific controls dictated by the underlying authority. The key behaviors:" },
+
+      { type: "ul", items: [
+        "**Check the registry and the authorizing law/regulation** — the registry entry for a Specified category points to the authority that prescribes its particular handling. You must follow those specifics, which may restrict dissemination more tightly, mandate particular protections, or impose other requirements.",
+        "**Don't assume the baseline is enough** — the entire point of Specified is that the baseline is NOT the full requirement. Treating Specified as Basic is under-protection, and it's a genuine compliance failure.",
+        "**When the specifics are unclear, escalate** — your security office or contracting officer can confirm the exact requirements for a Specified category."
+      ]},
+
+      { type: "h3", text: "Limited Dissemination Controls" },
+
+      { type: "p", text: "Independent of Basic/Specified, CUI may carry **limited dissemination controls (LDCs)** — additional markings that further restrict who may receive the information beyond the standard need-to-know. Examples include controls restricting dissemination to specific groups or requiring originator approval before further sharing. When present (you'll see them in the banner marking), they override the more permissive default dissemination and must be honored." },
+
+      { type: "h3", text: "Decontrol — When CUI Stops Being CUI" },
+
+      { type: "p", text: "CUI is not necessarily permanent. **Decontrol** is the formal process by which information ceases to be CUI — when the basis for control no longer applies (e.g., information is approved for public release, a time/event-based decontrol condition is met, or the designating authority decides control is no longer warranted). Key principles:" },
+
+      { type: "ul", items: [
+        "**Decontrol is generally the designating authority's decision** — as a contractor handling received CUI, you typically don't get to unilaterally decide it's no longer controlled.",
+        "**Until decontrolled, it stays CUI** — assume continued control until you have authoritative confirmation otherwise. 'I think this is old enough to not matter' is not decontrol.",
+        "**Decontrol doesn't erase history** — even after decontrol, prior controlled handling obligations applied while it was CUI."
+      ]},
+
+      { type: "h3", text: "The Practical Workflow" },
+
+      { type: "p", text: "Putting Lessons 2, 4, and 5 together: when CUI reaches you, read the marking to identify the category and whether it's Basic or Specified; apply the baseline for Basic or the specific controls for Specified; honor any limited-dissemination controls shown; and never treat something as decontrolled without authority. When any of these is unclear, the correct move is always to ask your security office rather than to guess — the cost of a question is minutes, the cost of a wrong assumption can be an incident." }
+    ],
+    quizzes: [
+      {
+        question: "Why is treating CUI Specified as if it were CUI Basic a compliance failure?",
+        options: [
+          "Because the entire point of Specified is that the baseline is NOT the full requirement — Specified has particular controls dictated by its authorizing authority, so applying only the baseline under-protects the information",
+          "Because Specified information is classified and Basic is not",
+          "Because Basic information requires more protection than Specified",
+          "Because Specified CUI can never be handled by contractors"
+        ],
+        correct: 0,
+        explanation: "CUI Specified exists precisely because its authorizing law/regulation prescribes controls beyond the baseline. Applying only the 32 CFR 2002 baseline to Specified information under-protects it — a genuine compliance failure. You must check the registry and the authorizing authority for the specific controls, and escalate when they're unclear."
+      },
+      {
+        question: "A contractor believes a piece of CUI they received is 'probably old enough not to matter anymore.' What is the correct stance?",
+        options: [
+          "Treat it as decontrolled, since enough time has passed",
+          "Destroy it immediately to avoid the question",
+          "It remains CUI until authoritatively decontrolled — decontrol is generally the designating authority's decision, and a contractor cannot unilaterally decide received CUI is no longer controlled",
+          "Email it to a colleague to get a second opinion"
+        ],
+        correct: 2,
+        explanation: "Decontrol is a formal process, generally the designating authority's decision. Until authoritatively decontrolled, the information stays CUI — 'I think it's old enough' is not decontrol. A contractor handling received CUI typically cannot unilaterally decontrol it, and should assume continued control until confirmed otherwise."
+      },
+      {
+        question: "What are limited dissemination controls (LDCs)?",
+        options: [
+          "Markings that indicate the document can be shared with anyone",
+          "Controls that apply only to classified information",
+          "A type of encryption applied to CUI files",
+          "Additional markings that further restrict who may receive the CUI beyond the standard need-to-know, which override the more permissive default and must be honored when present"
+        ],
+        correct: 3,
+        explanation: "LDCs are additional markings (visible in the banner) that restrict dissemination beyond standard need-to-know — for example, limiting dissemination to specific groups or requiring originator approval before further sharing. They apply independent of Basic/Specified and override the more permissive default dissemination, so they must be honored."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 2", phaseColor: "#1c4a7a",
+    title: "Physical Handling & Storage",
+    subtitle: "Need-to-know access, physical safeguarding, clean-desk discipline, and the destruction and disposal requirements for CUI.",
+    time: "30 min", type: "Marking & Handling",
+    video: { id: "xQNTG0-snlI", title: "CUI Handling, Storage, Transmission, Disposal & Vendor Management (ICS Data)" },
+    content: [
+      { type: "p", text: "Much of modern CUI lives in digital systems (Phase 3 covers those), but plenty still exists physically — printed drawings, marked documents, notes, removable media. And the human behaviors around physical handling are where a lot of real-world leaks happen. This lesson covers the physical side." },
+
+      { type: "h3", text: "Access on a Need-to-Know Basis" },
+
+      { type: "p", text: "The foundational access principle for CUI is **lawful government purpose plus need-to-know**. You may share CUI with someone who needs it to perform an authorized function — and you should NOT share it more widely than that, even with colleagues who are 'cleared' in a general sense or who are simply curious. Need-to-know is not 'works at the same company'; it's 'needs this specific information for an authorized purpose.' Over-sharing within an organization is one of the most common and underestimated handling failures." },
+
+      { type: "h3", text: "Physical Safeguarding" },
+
+      { type: "p", text: "When CUI is in physical form, it must be protected from unauthorized access:" },
+
+      { type: "ul", items: [
+        "**Control physical access** — CUI documents should be stored where unauthorized individuals can't access them: locked rooms, locked cabinets/drawers, or controlled areas, appropriate to the risk. The baseline standard is that it be protected from unauthorized access during both working hours and after.",
+        "**Don't leave CUI unattended in the open** — a marked drawing left on a desk, a printout left at a shared printer, a document visible to a visitor: each is an exposure. This is the basis of clean-desk discipline.",
+        "**Cover or secure when not in use** — when stepping away, CUI should be turned over, covered, or secured, not left face-up where passersby can read it."
+      ]},
+
+      { type: "h3", text: "The Shared-Printer and Visitor Problems" },
+
+      { type: "p", text: "Two everyday hazards deserve special mention. **Shared printers and copiers**: CUI sent to a communal printer and not retrieved promptly is exposed to everyone who walks by — retrieve CUI printouts immediately, and use secure-print features where available. **Visitors and uncleared persons in the workspace**: when non-need-to-know individuals (visitors, vendors, or even colleagues without need-to-know) are present, CUI must not be visible or accessible. This includes screens, whiteboards, and desk surfaces." },
+
+      { type: "h3", text: "Destruction and Disposal" },
+
+      { type: "p", text: "CUI does not go in the regular trash or recycling. It must be destroyed in a manner that makes it unreadable, indecipherable, and irrecoverable:" },
+
+      { type: "ul", items: [
+        "**Paper CUI** — cross-cut shredding to the standard required (the baseline references methods that render it unrecoverable; many organizations follow NSA/NIST-referenced shred standards). Tossing CUI in a recycling bin is a disposal failure.",
+        "**Electronic media** — sanitized or destroyed per recognized media-sanitization guidance (e.g., NIST SP 800-88) before disposal or reuse. Simply deleting files or reformatting is generally not sufficient.",
+        "**When in doubt, use approved destruction channels** — many organizations provide locked destruction bins or a designated process; use them rather than improvising."
+      ]},
+
+      { type: "h3", text: "The Human Factor" },
+
+      { type: "p", text: "Physical CUI failures are rarely malicious — they're convenience and habit: printing something and forgetting it, leaving a drawing out during a quick meeting, tossing a marked draft in the recycling because the shredder is across the building. Because the failures are mundane, the defenses must be habitual: retrieve prints immediately, secure CUI whenever you step away, shred don't toss, and never let need-to-know erode into 'everyone here is fine.' The discipline is unglamorous, and that's exactly why it's where incidents happen." }
+    ],
+    quizzes: [
+      {
+        question: "What does 'need-to-know' actually mean for sharing CUI within your own organization?",
+        options: [
+          "Anyone employed at the same company may access it",
+          "The person needs that specific information to perform an authorized function — not merely that they work there or are generally trustworthy",
+          "Anyone who asks for it has demonstrated need-to-know",
+          "Only the company's executives have need-to-know"
+        ],
+        correct: 1,
+        explanation: "Need-to-know is 'needs this specific information for an authorized purpose,' not 'works at the same company' or 'is generally cleared/trustworthy.' Over-sharing CUI internally — beyond those with a genuine functional need — is one of the most common and underestimated handling failures."
+      },
+      {
+        question: "How must paper CUI be disposed of?",
+        options: [
+          "Placed in the regular recycling bin to be environmentally responsible",
+          "Stored indefinitely since it can never be destroyed",
+          "Destroyed so it is unreadable, indecipherable, and irrecoverable — e.g., cross-cut shredding to the required standard — never tossed in regular trash or recycling",
+          "Torn in half and thrown away"
+        ],
+        correct: 2,
+        explanation: "CUI must be destroyed to render it unreadable, indecipherable, and irrecoverable — cross-cut shredding to the required standard for paper. Tossing CUI in trash or recycling is a disposal failure, as is merely tearing it. Electronic media require sanitization/destruction per guidance like NIST SP 800-88; deleting or reformatting is generally insufficient."
+      },
+      {
+        question: "Why do physical CUI failures tend to happen despite people's good intentions?",
+        options: [
+          "Because the failures are mundane conveniences and habits — forgetting a printout, leaving a drawing out during a quick meeting, tossing a marked draft — so the defenses must be made habitual",
+          "Because most employees are deliberately careless",
+          "Because physical CUI is harder to protect than classified information",
+          "Because there are no rules for physical CUI handling"
+        ],
+        correct: 0,
+        explanation: "Physical CUI failures are rarely malicious; they're convenience and habit — unretrieved prints, documents left out during a quick meeting, tossing a marked draft because the shredder is far away. Because the failure modes are mundane, the countermeasures must be habitual: retrieve prints immediately, secure CUI when stepping away, shred rather than toss."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 2", phaseColor: "#1c4a7a",
+    title: "Common Handling Mistakes",
+    subtitle: "Real-world failure patterns — mismarking, commingling, oversharing, improper email — framed as cautionary cases to recognize and avoid.",
+    time: "30 min", type: "Marking & Handling",
+    video: { id: "jvYgzfxuQEI", title: "CUI Management Mishaps: Avoid These Blunders! (On Call Compliance)" },
+    content: [
+      { type: "p", text: "Knowing the rules and applying them reliably are different skills. This lesson is a catalogue of the failure patterns that actually cause CUI incidents — recognizing them is half the battle, because most happen through inattention rather than ignorance." },
+
+      { type: "h3", text: "Mistake 1: Under-Marking or Mismarking" },
+
+      { type: "p", text: "The failure: marking CUI Specified as Basic, omitting category markings, or failing to mark CUI at all. The consequence: downstream handlers don't apply the right protections because the marking — their instruction set — is wrong or missing. The fix: when you create or derive a CUI document, mark it according to the source material and your guidance; when you receive something that seems mismarked, raise it with your security office rather than acting on the wrong marking or 'correcting' it yourself." },
+
+      { type: "h3", text: "Mistake 2: Commingling" },
+
+      { type: "p", text: "The failure: mixing CUI with non-CUI in the same document, folder, or system without proper marking, so the CUI becomes invisible — or, conversely, dumping CUI into a general-purpose system not authorized to hold it. The consequence: CUI ends up in places without the required protections, and people handle it unaware. The fix: keep CUI in authorized locations, mark mixed documents properly (portion marking helps here), and don't drop CUI into convenient-but-unauthorized tools (random cloud drives, personal accounts, unapproved chat apps)." },
+
+      { type: "h3", text: "Mistake 3: Over-Sharing / Need-to-Know Erosion" },
+
+      { type: "p", text: "The failure: 'cc-ing the whole team,' forwarding CUI to people who don't need it, or treating 'works here' as equivalent to need-to-know. The consequence: the controlled-access principle erodes, expanding the exposure surface and sometimes pushing CUI to people not authorized to have it at all (e.g., a foreign-person colleague receiving export-controlled CUI). The fix: send CUI only to those with a genuine functional need, scrutinize recipient lists before sending, and be especially careful with export-controlled CUI where the recipient's nationality matters." },
+
+      { type: "h3", text: "Mistake 4: Improper Email & Transmission" },
+
+      { type: "p", text: "The failure: emailing CUI unencrypted, sending it to a personal email account, or transmitting it through channels not authorized for CUI. The consequence: CUI traverses or lands in unprotected places. The fix is covered in depth in the next lesson, but the headline: CUI in transit needs protection (encryption), authorized channels only, and never personal accounts or unapproved services. Email is the single most common vector for CUI incidents because it's so frictionless." },
+
+      { type: "h3", text: "Mistake 5: Treating Unclassified as Unprotected" },
+
+      { type: "p", text: "The failure: the attitude that 'it's only CUI, not classified, so I don't need to be careful.' The consequence: every other mistake on this list, downstream of a casual mindset. The fix: internalize that CUI is mandatory-protection information with real consequences for mishandling — different from classified, but not optional." },
+
+      { type: "h3", text: "Mistake 6: Assuming Decontrol" },
+
+      { type: "p", text: "The failure: deciding on your own that something is 'old' or 'probably public now' and handling it as uncontrolled. The consequence: premature release of still-controlled information. The fix: treat CUI as controlled until authoritatively decontrolled by the proper authority." },
+
+      { type: "h3", text: "The Pattern Behind the Patterns" },
+
+      { type: "p", text: "Notice the common thread: nearly every mistake is a convenience shortcut or a casual assumption, not a deliberate act. The person cc-ing the team is trying to be helpful; the person emailing unencrypted is trying to be fast; the person tossing a draft is trying to clear their desk. CUI discipline is fundamentally about resisting the frictionless wrong action in favor of the slightly-more-effortful right one. When something feels too easy — one click to share, one toss to dispose — that's the moment to pause and check. The next phase turns to the systems and transmission rules where these mistakes most often play out." }
+    ],
+    quizzes: [
+      {
+        question: "What is the common thread behind nearly all CUI handling mistakes?",
+        options: [
+          "Deliberate malicious intent by employees",
+          "Technical failures in the IT systems",
+          "Lack of any written rules to follow",
+          "Convenience shortcuts and casual assumptions — being helpful, fast, or tidy — rather than deliberate acts, which is why the right action requires resisting the frictionless wrong one"
+        ],
+        correct: 3,
+        explanation: "Most CUI mistakes are convenience shortcuts or casual assumptions, not malice: cc-ing the team to be helpful, emailing unencrypted to be fast, tossing a draft to tidy up. CUI discipline is about resisting the frictionless wrong action in favor of the slightly-more-effortful right one — when sharing or disposing feels too easy, that's the moment to pause."
+      },
+      {
+        question: "An engineer receives a document that appears to be mismarked (Specified content marked only as Basic). What is the correct response?",
+        options: [
+          "Correct the marking themselves and continue",
+          "Raise it with the security office rather than acting on the wrong marking or unilaterally 'fixing' it",
+          "Ignore the discrepancy and handle it as Basic since that's what's marked",
+          "Delete the document to avoid the problem"
+        ],
+        correct: 1,
+        explanation: "A suspected mismarking should go to the security office — you should neither act on the wrong marking (under-protecting Specified content) nor unilaterally re-mark it yourself. The marking is the handling instruction set, and resolving a discrepancy is a security-office matter, not a self-service correction."
+      },
+      {
+        question: "Why is 'commingling' a CUI handling failure?",
+        options: [
+          "Because CUI must always be stored alone in a dedicated building",
+          "Because commingling is only a problem for classified information",
+          "Because CUI files are too large to combine with other files",
+          "Because mixing CUI with non-CUI without proper marking can make the CUI invisible, or dropping CUI into unauthorized systems (random cloud drives, personal accounts, unapproved apps) places it where the required protections don't exist"
+        ],
+        correct: 3,
+        explanation: "Commingling means mixing CUI with non-CUI so the CUI becomes invisible/unmarked, or dumping CUI into convenient-but-unauthorized locations. Either way, CUI ends up somewhere lacking the required protections and people handle it unaware. The fix: authorized locations only, proper marking of mixed documents, and no unapproved tools."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 3", phaseColor: "#1a6b3c",
+    title: "Transmission Rules",
+    subtitle: "Moving CUI safely: email and encryption requirements, portable media, physical mail and fax — what's permitted and what isn't.",
+    time: "35 min", type: "Transmission & Systems",
+    video: null,
+    resource: { type: "reference", items: [
+      { label: "NIST SP 800-171 Rev 2 — System & Communications Protection family", url: "https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final" },
+      { label: "32 CFR Part 2002 — CUI safeguarding (eCFR)", url: "https://www.ecfr.gov/current/title-32/part-2002" }
+    ], expansion: "The transmission rules trace directly to the **System and Communications Protection** family in NIST SP 800-171 Rev 2, which requires cryptographic protection of CUI confidentiality in transit — in practice, FIPS-validated encryption. 32 CFR Part 2002 establishes the broader safeguarding baseline. The practical takeaways from the lesson map onto these sources: encrypt CUI in transit, use only authorized channels and accounts (never personal email), scrutinize every recipient, and watch attachments and expanding email threads. When a channel or method isn't clearly authorized, confirm with your security office before sending." },
+    content: [
+      { type: "p", text: "Transmission is where CUI is most exposed — the moment it leaves your controlled environment and travels to another. It's also where the most frequent incidents occur, because transmitting is so frictionless (one click to send an email). This lesson covers the rules for moving CUI safely." },
+
+      { type: "h3", text: "The Core Principle: Protect CUI In Transit" },
+
+      { type: "p", text: "Whenever CUI moves, it must be protected against interception or access by unauthorized parties along the way. For digital transmission, this overwhelmingly means **encryption**. The baseline expectation is that CUI is encrypted when transmitted, using cryptography that meets the applicable federal standard — in practice, FIPS-validated encryption is the benchmark that NIST SP 800-171 points to for protecting CUI confidentiality in transit." },
+
+      { type: "h3", text: "Email — The Highest-Risk Channel" },
+
+      { type: "p", text: "Email causes more CUI incidents than any other channel because it's so easy to get wrong:" },
+
+      { type: "ul", items: [
+        "**Encrypt CUI in email** — CUI sent by email must be encrypted (e.g., via your organization's approved email encryption, S/MIME, or an approved secure-transfer mechanism). Plaintext email across the open internet is not acceptable for CUI.",
+        "**Authorized accounts and systems only** — send from and to organizational accounts on systems authorized to handle CUI. Never route CUI through a personal email account (yours or the recipient's).",
+        "**Scrutinize recipients** — confirm every recipient has need-to-know, and for export-controlled CUI confirm recipients are authorized persons. The 'reply-all' and autocomplete-wrong-recipient errors are classic email incidents.",
+        "**Watch attachments and threads** — a marked CUI attachment on an unencrypted email, or CUI quoted in a forwarded thread that picks up new recipients, are easy-to-miss exposures."
+      ]},
+
+      { type: "h3", text: "Portable Media" },
+
+      { type: "p", text: "USB drives, external disks, and similar media carrying CUI must be encrypted and physically controlled. Removable media is a notorious loss vector — drives are small and easily misplaced — so the data on them must be protected (encryption) such that loss of the device isn't automatically loss of the CUI. Many organizations restrict or prohibit removable media for CUI entirely; follow your organization's policy, which may be stricter than the baseline." },
+
+      { type: "h3", text: "Physical Mail and Hand-Carry" },
+
+      { type: "p", text: "When CUI travels physically (printed documents, media):" },
+
+      { type: "ul", items: [
+        "**Use methods that protect against unauthorized disclosure** — appropriate packaging (opaque envelopes/wrapping that doesn't reveal contents or markings externally) and tracked/accountable carriers as the sensitivity warrants.",
+        "**Don't expose markings externally** — the package exterior shouldn't advertise that it contains CUI.",
+        "**Hand-carry with control** — if carrying CUI personally, keep it under your control and protected from casual viewing (the clean-desk discipline from Lesson 7 extends to travel)."
+      ]},
+
+      { type: "h3", text: "Fax and Voice" },
+
+      { type: "p", text: "Fax transmission of CUI should use secure fax to a verified recipient at a controlled receiving end (an unattended fax machine in a shared area defeats the purpose). For voice, be aware of who can overhear discussions of CUI — speakerphone in an open area, calls in public spaces, and voicemail systems are all potential exposures." },
+
+      { type: "h3", text: "The Transmission Checklist" },
+
+      { type: "p", text: "Before transmitting CUI by any means, run the mental checklist: Is the channel authorized for CUI? Is the content encrypted/protected appropriately for the medium? Does every recipient have need-to-know (and authorized-person status for export-controlled CUI)? Are the markings intact? Is anything riding along that shouldn't be (extra attachments, expanded thread recipients)? The few seconds this takes is the cheapest insurance against the most common category of CUI incident. When the channel or method isn't clearly authorized, stop and confirm with your security office before sending." }
+    ],
+    quizzes: [
+      {
+        question: "What is the baseline expectation for transmitting CUI digitally?",
+        options: [
+          "It must be encrypted in transit using cryptography meeting the applicable federal standard — FIPS-validated encryption is the benchmark NIST SP 800-171 points to for protecting CUI confidentiality",
+          "It can be sent in plaintext as long as the subject line says 'CUI'",
+          "It only needs encryption if it is also classified",
+          "Encryption is recommended but never required"
+        ],
+        correct: 0,
+        explanation: "CUI must be protected in transit, which for digital transmission means encryption meeting the applicable federal standard — FIPS-validated encryption is the benchmark NIST SP 800-171 references for protecting CUI confidentiality. Plaintext transmission across the open internet (e.g., unencrypted email) is not acceptable for CUI."
+      },
+      {
+        question: "Why is email the highest-risk channel for CUI incidents?",
+        options: [
+          "Because email servers are inherently insecure and cannot be used for CUI at all",
+          "Because it is so frictionless to get wrong — unencrypted sends, personal accounts, wrong recipients via reply-all/autocomplete, and CUI riding along in attachments or expanded forwarded threads",
+          "Because email is slower than other transmission methods",
+          "Because CUI cannot legally be sent by email under any circumstances"
+        ],
+        correct: 1,
+        explanation: "Email causes more CUI incidents than any channel because the errors are so easy and frictionless: sending unencrypted, using personal accounts, wrong recipients from reply-all or autocomplete, and CUI hidden in attachments or forwarded threads that pick up new recipients. Email can be used for CUI when encrypted, on authorized accounts, with scrutinized recipients."
+      },
+      {
+        question: "What is the correct approach to CUI on portable media like USB drives?",
+        options: [
+          "Portable media is always fine for CUI as long as it's a new drive",
+          "Portable media never needs encryption since it's not transmitted over a network",
+          "The data must be encrypted and the media physically controlled, since drives are easily lost; many organizations restrict or prohibit removable media for CUI entirely, so follow your (possibly stricter) organizational policy",
+          "CUI on USB drives only needs a password-protected folder"
+        ],
+        correct: 2,
+        explanation: "Removable media carrying CUI must be encrypted and physically controlled, because drives are a notorious loss vector — encryption ensures losing the device isn't automatically losing the CUI. Many organizations restrict or prohibit removable media for CUI outright, and organizational policy (which may exceed the baseline) governs."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 3", phaseColor: "#1a6b3c",
+    title: "CUI on Information Systems",
+    subtitle: "Protecting CUI in non-federal systems: the role of NIST SP 800-171, its control families, and the Revision 2 vs. Revision 3 reality.",
+    time: "40 min", type: "Transmission & Systems",
+    video: { id: "QjATSFebmyA", title: "Marking CUI in Your I.T. Environment (Summit 7 / CS2 San Diego)" },
+    content: [
+      { type: "p", text: "Most CUI today lives on computers and networks — and when those are non-federal systems (a contractor's own IT), there's a specific standard that defines how to protect it: NIST Special Publication 800-171. This lesson explains what it is and the version situation you need to understand, without turning into a control-by-control checklist (that's a compliance specialist's job, not this track's)." },
+
+      { type: "h3", text: "What NIST SP 800-171 Is" },
+
+      { type: "p", text: "NIST SP 800-171 is titled 'Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations.' It's the standard that specifies the security requirements a contractor's information systems must meet to protect CUI confidentiality. It's a tailored subset of the much larger NIST SP 800-53 controls, adapted for non-federal organizations. For the defense industrial base, compliance with 800-171 is contractually required through DFARS 252.204-7012." },
+
+      { type: "h3", text: "The Control Families" },
+
+      { type: "p", text: "800-171 organizes its requirements into control families covering the major dimensions of information security. In the currently-enforced revision (Rev 2), these are 14 families including Access Control, Awareness and Training, Audit and Accountability, Configuration Management, Identification and Authentication, Incident Response, Maintenance, Media Protection, Personnel Security, Physical Protection, Risk Assessment, Security Assessment, System and Communications Protection, and System and Information Integrity. The point to absorb is the breadth: protecting CUI on systems isn't one thing (like encryption) — it's access control, monitoring, configuration discipline, training, incident response, and more, working together." },
+
+      { type: "h3", text: "The Revision 2 vs. Revision 3 Situation — Read Carefully" },
+
+      { type: "p", text: "This is the single most important currency point in this track, and getting it wrong leads people astray. As of early 2026:" },
+
+      { type: "ul", items: [
+        "**Revision 2 is the enforced standard.** It has 110 security requirements across 14 families. This is the version that CMMC Level 2 assessments are conducted against, the version your System Security Plan and SPRS score must reflect, and the version assessors benchmark.",
+        "**Revision 3 exists but is NOT yet required.** NIST finalized Rev 3 in May 2024 — it reduced the count from 110 to 97 requirements, added new control families (including Planning and Supply Chain Risk Management), and introduced Organization-Defined Parameters. But the DoD has NOT authorized Rev 3 for compliance scoring, SPRS reporting, or CMMC assessments. Under a DoD Class Deviation, contractors continue using Rev 2.",
+        "**The transition will come via rulemaking, later.** DoD has said it will move to Rev 3 through future rulemaking (likely sometime in the 2026–2027+ window), but until that happens, Rev 2 is the only enforceable standard for CMMC."
+      ]},
+
+      { type: "p", text: "**The practical guidance:** for DoD/CMMC compliance today, comply with Rev 2 (110 controls). Don't align solely to Rev 3 thinking you're ahead — you could show 'unmet' Rev 2 requirements and fail an assessment. Track Rev 3 to prepare for the eventual transition, but build your compliance posture on Rev 2 until the rules change. Always confirm the current enforced revision with your security/compliance office before relying on it." },
+
+      { type: "h3", text: "What This Means for You as an Individual" },
+
+      { type: "p", text: "Most engineers won't implement 800-171 controls personally — that's the IT/security organization's job. But you live inside those controls every day: the access permissions on your CUI systems, the requirement to use multi-factor authentication, the prohibition on installing unapproved software, the monitoring of your activity, the rule against moving CUI to unauthorized systems. Understanding that these aren't arbitrary IT annoyances but the literal mechanism of CUI compliance helps you work with them rather than around them. The engineer who emails CUI to a personal Gmail to 'work from home more easily' has just defeated a stack of 800-171 controls in one click." }
+    ],
+    quizzes: [
+      {
+        question: "Which revision of NIST SP 800-171 is the enforced standard for CMMC compliance as of early 2026?",
+        options: [
+          "Revision 2 (110 requirements across 14 families) — the DoD has not authorized Revision 3 for compliance scoring, SPRS reporting, or CMMC assessments, and contractors continue using Rev 2 under a DoD Class Deviation",
+          "Revision 3, since it is the newest and was finalized in 2024",
+          "Both revisions are equally enforceable; contractors choose",
+          "Neither — 800-171 does not apply to CMMC"
+        ],
+        correct: 0,
+        explanation: "Revision 2 (110 controls, 14 families) is the enforced standard for CMMC. Although NIST finalized Rev 3 in May 2024 (97 requirements, new families, ODPs), the DoD has not authorized it for scoring, SPRS, or assessments — contractors continue on Rev 2 under a Class Deviation. The transition to Rev 3 will come through future rulemaking, not yet."
+      },
+      {
+        question: "Why is aligning solely to NIST 800-171 Revision 3 today a risk for a DoD contractor?",
+        options: [
+          "Revision 3 is less secure than Revision 2",
+          "Revision 3 is illegal to implement before 2028",
+          "Because assessments are still conducted against Rev 2 — aligning only to Rev 3 could show 'unmet' Rev 2 requirements and fail an assessment; the guidance is to comply with Rev 2 now while tracking Rev 3 for the eventual transition",
+          "There is no risk; Rev 3 is fully interchangeable with Rev 2"
+        ],
+        correct: 2,
+        explanation: "CMMC assessments benchmark against Rev 2, so a contractor aligned only to Rev 3 could show 'unmet' Rev 2 requirements and fail. The correct posture: build compliance on Rev 2 (the enforced standard), keep your SSP/POA&M/SPRS reflecting Rev 2, and track Rev 3 changes to prepare for the eventual rulemaking-driven transition."
+      },
+      {
+        question: "How should an individual engineer think about the NIST 800-171 controls they encounter (MFA, access permissions, software restrictions)?",
+        options: [
+          "As arbitrary IT annoyances to work around when inconvenient",
+          "As relevant only during a formal audit",
+          "As optional suggestions that only apply to the IT department",
+          "As the literal mechanism of CUI compliance — understanding that defeating them (e.g., emailing CUI to personal Gmail to work from home) breaks a stack of controls in one click"
+        ],
+        correct: 3,
+        explanation: "The 800-171 controls engineers live inside daily — MFA, access permissions, software restrictions, activity monitoring, no-unauthorized-systems rules — are the actual mechanism of CUI protection, not arbitrary annoyances. Recognizing this helps people work with the controls rather than around them; the 'email CUI to personal Gmail' shortcut defeats a whole stack of controls instantly."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 3", phaseColor: "#1a6b3c",
+    title: "Cloud & FedRAMP",
+    subtitle: "When CUI lives in the cloud: the FedRAMP Moderate Baseline requirement, what 'in-boundary' means, and shared responsibility.",
+    time: "35 min", type: "Transmission & Systems",
+    video: null,
+    resource: { type: "reference", items: [
+      { label: "FedRAMP Marketplace — verify a cloud provider's authorization", url: "https://marketplace.fedramp.gov/" },
+      { label: "DFARS 252.204-7012(b)(2)(ii)(D) — cloud provision (eCFR)", url: "https://www.ecfr.gov/current/title-48/chapter-2/subchapter-H/part-252/subpart-252.2/section-252.204-7012" }
+    ], expansion: "DFARS 252.204-7012 states that when a contractor uses an external cloud service provider to store, process, or transmit covered defense information, the provider must meet security requirements equivalent to the **FedRAMP Moderate baseline**. Use the FedRAMP Marketplace to confirm a provider's authorization status before placing CUI in it. Remember the shared-responsibility model: an authorized cloud secures the infrastructure, but you remain responsible for configuration, access, and data handling within it — an authorized cloud is necessary but not sufficient." },
+    content: [
+      { type: "p", text: "Increasingly, CUI is stored, processed, or transmitted in cloud services rather than on-premises servers. The cloud introduces a specific requirement that's easy to overlook: not every cloud service is authorized to hold CUI, and using the wrong one is a compliance failure even if the service is otherwise excellent." },
+
+      { type: "h3", text: "The FedRAMP Moderate Baseline Requirement" },
+
+      { type: "p", text: "When a cloud service is used to store, process, or transmit CUI, that cloud service provider must meet the **FedRAMP Moderate Baseline** security controls (or equivalent). FedRAMP (the Federal Risk and Authorization Management Program) is the government's standardized program for authorizing cloud services, and 'Moderate' is the baseline level relevant to CUI. The proposed FAR CUI Rule makes this explicit: where a contractor uses a cloud service provider to store, process, or transmit CUI, that provider must meet FedRAMP Moderate Baseline standards." },
+
+      { type: "p", text: "The practical consequence: you cannot simply drop CUI into any convenient consumer cloud service (a personal Dropbox, a free Google Drive, a random file-sharing site). The service must be one authorized to the appropriate level. Many organizations maintain a specific authorized cloud environment for CUI for exactly this reason." },
+
+      { type: "h3", text: "Government Cloud Tiers" },
+
+      { type: "p", text: "For DoD work especially, you'll encounter cloud environments built to meet these requirements — commercial clouds offer government-specific regions and tiers (often referenced as GCC, GCC High, and DoD-specific tiers for Microsoft environments, and equivalent offerings from other providers) that are configured and authorized for controlled data. Which tier is appropriate depends on the data — for example, ITAR/export-controlled CUI typically demands the higher tiers that ensure data residency and personnel restrictions. The right answer for your situation comes from your contract and security office, not from a general rule." },
+
+      { type: "h3", text: "The Shared Responsibility Model" },
+
+      { type: "p", text: "A critical concept that trips up many organizations: using a FedRAMP-authorized cloud does NOT automatically make you compliant. Cloud security is a **shared responsibility**:" },
+
+      { type: "ul", items: [
+        "**The cloud provider** is responsible for the security OF the cloud — the infrastructure, the physical data centers, the platform-level controls covered by their FedRAMP authorization.",
+        "**You (the customer)** remain responsible for security IN the cloud — how you configure it, who you grant access to, how you handle the data within it, and the controls that are yours to implement.",
+        "**The implication:** an authorized cloud is necessary but not sufficient. You can absolutely mishandle CUI inside a perfectly-compliant FedRAMP environment by misconfiguring access, over-sharing, or moving data improperly. The authorization covers the provider's layer; your handling discipline covers yours."
+      ]},
+
+      { type: "h3", text: "Managed Service Providers" },
+
+      { type: "p", text: "Many contractors rely on Managed Service Providers (MSPs) for IT. An important nuance: when an MSP provides services that touch CUI (cloud infrastructure, security tools), the MSP is typically pulled into the scope of the contractor's compliance — its practices must support the contractor's obligations and be ready for assessment. If your organization uses an MSP for CUI-relevant systems, their security posture is part of your compliance story, not separate from it." },
+
+      { type: "h3", text: "The Takeaway for Individuals" },
+
+      { type: "p", text: "For the individual engineer, the cloud rules reduce to a simple discipline: use only the cloud environments your organization has authorized for CUI, and don't improvise. The convenient consumer tool — the personal cloud drive, the quick file-sharing link, the unapproved collaboration app — is precisely the trap, because it works perfectly well technically while being completely non-compliant. When you need to store or share CUI and the authorized path feels inconvenient, that friction is the control working as intended; route around it through your security office, not through a consumer service." }
+    ],
+    quizzes: [
+      {
+        question: "When a cloud service is used to store, process, or transmit CUI, what must the cloud service provider meet?",
+        options: [
+          "Any commercial security certification of the provider's choosing",
+          "The FedRAMP Moderate Baseline security controls (or equivalent) — the standardized authorization level relevant to CUI",
+          "Only a basic SSL certificate",
+          "No specific requirement, as long as the data is encrypted"
+        ],
+        correct: 1,
+        explanation: "A cloud provider storing, processing, or transmitting CUI must meet the FedRAMP Moderate Baseline (or equivalent). The proposed FAR CUI Rule makes this explicit. You can't drop CUI into any convenient consumer cloud — the service must be authorized to the appropriate level, which is why organizations maintain specific authorized environments for CUI."
+      },
+      {
+        question: "Under the shared responsibility model, why is using a FedRAMP-authorized cloud necessary but not sufficient for compliance?",
+        options: [
+          "Because FedRAMP authorization expires after 30 days",
+          "Because authorized clouds are actually less secure than on-premises systems",
+          "Because the provider is responsible for security OF the cloud (infrastructure), while the customer remains responsible for security IN the cloud (configuration, access, data handling) — you can still mishandle CUI inside a compliant environment",
+          "Because shared responsibility means the provider handles everything"
+        ],
+        correct: 2,
+        explanation: "Cloud security is shared: the provider secures the cloud infrastructure (covered by their FedRAMP authorization), but the customer secures their use of it — configuration, access grants, and data handling. So you can mishandle CUI (misconfigure access, over-share, move data improperly) inside a perfectly compliant FedRAMP environment. The authorization covers the provider's layer, not yours."
+      },
+      {
+        question: "An engineer finds the authorized CUI cloud path inconvenient and considers using a personal cloud drive instead. What's the right framing?",
+        options: [
+          "The friction of the authorized path is the control working as intended — the convenient consumer tool is the trap because it works technically while being completely non-compliant; route around the friction through the security office, not a consumer service",
+          "If the personal drive has encryption, it's an acceptable substitute",
+          "Personal cloud drives are fine for CUI as long as the files are deleted afterward",
+          "Any cloud service is acceptable since the data is the engineer's responsibility anyway"
+        ],
+        correct: 0,
+        explanation: "The convenient consumer tool is precisely the trap: it works perfectly well technically while being completely non-compliant (not FedRAMP-authorized for CUI). When the authorized path feels inconvenient, that friction is the control functioning as designed — the right move is to route through the security office for an authorized solution, never to improvise with a consumer service."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 3", phaseColor: "#1a6b3c",
+    title: "Incident Reporting",
+    subtitle: "When CUI is compromised: the DFARS 252.204-7012 cyber-incident reporting obligation, the 72-hour expectation, and who you notify.",
+    time: "30 min", type: "Transmission & Systems",
+    video: { id: "o7e7BiDHLv0", title: "CUI: Unauthorized Disclosure — Prevention and Reporting (US National Archives / ISOO)" },
+    content: [
+      { type: "p", text: "Even with good discipline, incidents happen — a lost laptop, a misdirected email, a network intrusion. What separates a manageable incident from a compliance catastrophe is often the response: reporting it correctly and promptly. This lesson covers the reporting obligation, which is itself a contractual requirement." },
+
+      { type: "h3", text: "The DFARS 252.204-7012 Reporting Requirement" },
+
+      { type: "p", text: "For defense contractors, the clause DFARS 252.204-7012 ('Safeguarding Covered Defense Information and Cyber Incident Reporting') does two things: it requires implementing NIST SP 800-171 to protect CUI (covered in Lesson 10), and it imposes a **cyber incident reporting obligation**. When a contractor discovers a cyber incident affecting covered defense information (which includes CUI) or the contractor's ability to perform, it must report rapidly." },
+
+      { type: "ul", items: [
+        "**The 72-hour expectation** — the clause requires reporting the cyber incident to DoD rapidly, within 72 hours of discovery. This is a tight window by design — rapid reporting enables a coordinated response.",
+        "**Report to the designated DoD mechanism** — reports go through the official DoD reporting portal (historically dibnet.dod.mil), and a DoD-approved medium assurance certificate is generally needed to file.",
+        "**Preserve evidence** — the clause requires preserving and protecting images of affected systems and relevant monitoring data to support the government's analysis."
+      ]},
+
+      { type: "h3", text: "What Counts as a Reportable Incident" },
+
+      { type: "p", text: "A cyber incident under the clause is, broadly, actions through a network that compromise — or potentially compromise — covered defense information on a contractor's system, or that affect the contractor's ability to perform requirements designated as operationally critical. The key nuance: it includes potential compromise, not only confirmed exfiltration. You don't wait for certainty that data was stolen; a credible incident affecting CUI-bearing systems triggers the obligation." },
+
+      { type: "h3", text: "Your Role as an Individual" },
+
+      { type: "p", text: "Most engineers will never file a DFARS report themselves — that's handled by the security/IT organization and contract management. But individuals are almost always the ones who FIRST notice something wrong: the lost device, the suspicious email, the realization that CUI went somewhere it shouldn't have. The single most important individual behavior is **report immediately, internally, without delay or self-protective hesitation**:" },
+
+      { type: "ul", items: [
+        "**Report to your security office / incident response the moment you suspect a problem** — a misdirected CUI email, a lost laptop, a possible compromise. The clock on the organization's 72-hour obligation effectively starts at discovery, and discovery often starts with you.",
+        "**Don't try to quietly fix it yourself** — deleting the sent email, hoping no one noticed, or 'handling it' privately delays the formal response and can turn a reportable-but-manageable incident into a worse compliance problem.",
+        "**Don't fear reporting** — organizations far prefer a prompt report of a mistake to a hidden one discovered later. The compliance failure isn't usually the human error; it's the failure to report and respond."
+      ]},
+
+      { type: "h3", text: "The Reporting Mindset" },
+
+      { type: "p", text: "The instinct after a mistake — embarrassment, the hope it'll blow over, the urge to quietly undo it — is exactly the wrong one for a CUI incident. The reporting obligation exists because rapid, honest disclosure enables containment and the legally-required government notification. Internalize that reporting a suspected incident promptly is the responsible, expected, career-safe action, and that the real failure is silence. When something goes wrong with CUI, the right first move is always the same: tell your security office now." },
+
+      { type: "p", text: "**Reminder of this track's framing:** the specific reporting timelines, portals, and obligations vary by contract and clause and change over time. Confirm your organization's exact incident-reporting procedure with your security office before you need it — ideally know it in advance so that in the moment, you simply act." }
+    ],
+    quizzes: [
+      {
+        question: "Under DFARS 252.204-7012, what is the expected timeframe for reporting a cyber incident affecting covered defense information?",
+        options: [
+          "Within 30 days of discovery",
+          "Only if the contractor confirms data was definitely stolen",
+          "At the end of the contract period",
+          "Rapidly — within 72 hours of discovery — to the designated DoD reporting mechanism"
+        ],
+        correct: 3,
+        explanation: "DFARS 252.204-7012 requires rapid reporting within 72 hours of discovery to the official DoD mechanism (historically dibnet.dod.mil, needing a medium assurance certificate). The clause also requires preserving system images and monitoring data. The tight window is by design, enabling coordinated response."
+      },
+      {
+        question: "Does a reportable cyber incident require confirmed exfiltration of CUI?",
+        options: [
+          "Yes — you must prove data was stolen before reporting",
+          "No — the obligation includes potential compromise, not only confirmed exfiltration; a credible incident affecting CUI-bearing systems triggers the obligation without waiting for certainty",
+          "Only physical theft of devices counts as an incident",
+          "Only incidents during business hours are reportable"
+        ],
+        correct: 1,
+        explanation: "A cyber incident under the clause includes actions that compromise OR potentially compromise covered defense information. You don't wait for confirmation that data was exfiltrated — a credible incident affecting CUI-bearing systems triggers the reporting obligation. Waiting for certainty would defeat the purpose of rapid reporting."
+      },
+      {
+        question: "An engineer realizes they just emailed CUI to the wrong external recipient. What is the correct first action?",
+        options: [
+          "Quietly delete the sent email and hope no one noticed",
+          "Email the recipient asking them to delete it, and consider the matter closed",
+          "Wait a few days to see if the recipient says anything",
+          "Report it immediately to the security office / incident response, without delay or self-protective hesitation — the real compliance failure is silence, not the human error"
+        ],
+        correct: 3,
+        explanation: "Report immediately and internally. The organization's 72-hour clock effectively starts at discovery, and individuals are usually the first to notice. Trying to quietly fix it (deleting the sent email, handling it privately) delays the formal response and worsens the compliance problem. Organizations far prefer a prompt report to a hidden incident — the failure is silence, not the mistake."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 4", phaseColor: "#b8860b",
+    title: "CMMC in Plain English",
+    subtitle: "The Cybersecurity Maturity Model Certification: what it is, what Level 2 means for CUI handlers, self-assessment vs. C3PAO, and the phased rollout reality.",
+    time: "40 min", type: "Obligations & Landscape",
+    video: { id: "ND60r02-_1M", title: "CMMC Scoping Part 2 — CUI Assets & Controlled Unclassified Information (Kieri Solutions)" },
+    content: [
+      { type: "p", text: "CMMC is the framework that puts teeth into CUI protection for the defense industrial base. For years, contractors self-attested to implementing NIST 800-171, with limited verification. CMMC changes that — it adds assessment and certification, making 'we protect CUI' something you increasingly have to prove, not just assert. This lesson explains it in plain terms." },
+
+      { type: "h3", text: "What CMMC Is" },
+
+      { type: "p", text: "The Cybersecurity Maturity Model Certification (CMMC) is a DoD program that verifies defense contractors have implemented the required cybersecurity controls to protect FCI and CUI. It's established by the regulation 32 CFR Part 170 (the 'program rule', effective December 2024) and made contractually enforceable through the DFARS acquisition rule (48 CFR, effective November 10, 2025). In essence: NIST 800-171 says what controls to implement; CMMC verifies that you actually did." },
+
+      { type: "h3", text: "The Levels" },
+
+      { type: "p", text: "CMMC has tiered levels matched to the sensitivity of the information:" },
+
+      { type: "ul", items: [
+        "**Level 1** — for contractors handling FCI (the broad, lower tier). Based on the 15 basic safeguarding requirements of FAR 52.204-21. Self-assessment.",
+        "**Level 2** — for contractors handling CUI. This is the one that matters for CUI handlers. Aligned to NIST SP 800-171 Revision 2's 110 controls. Depending on the contract, Level 2 may be met by self-assessment or may require a certified third-party assessment.",
+        "**Level 3** — for the highest-sensitivity programs. Builds on Level 2 with additional controls (drawn from NIST SP 800-172) and is assessed by the government (DIBCAC)."
+      ]},
+
+      { type: "p", text: "For most CUI-handling aerospace contractors, **Level 2 is the target**, and the central question is whether your contracts require a self-assessment or a third-party certified assessment." },
+
+      { type: "h3", text: "Self-Assessment vs. C3PAO" },
+
+      { type: "p", text: "The big shift CMMC introduces is third-party verification for higher-stakes Level 2:" },
+
+      { type: "ul", items: [
+        "**Self-assessment** — the contractor assesses its own compliance, documents it (System Security Plan and SPRS score), and an official affirms it. Some Level 2 contracts permit this.",
+        "**C3PAO assessment** — a Certified Third-Party Assessment Organization independently assesses and certifies compliance. Other Level 2 contracts require this, removing self-attestation as the basis.",
+        "**POA&Ms are limited** — a Plan of Action and Milestones (for fixing gaps) is allowed but constrained: CMMC limits how many open items you can have at award and requires closing them within 180 days."
+      ]},
+
+      { type: "h3", text: "The Phased Rollout (Current Reality)" },
+
+      { type: "p", text: "CMMC is rolling out over four phases, each beginning one year apart, starting from the November 10, 2025 effective date:" },
+
+      { type: "table", headers: ["Phase", "Begins", "What it requires"],
+        rows: [
+          ["Phase 1", "Nov 10, 2025", "Level 1/2 self-assessments as pre-award conditions; DoD may require Level 2 C3PAO at its discretion for select contracts"],
+          ["Phase 2", "Nov 10, 2026", "Mandatory Level 2 C3PAO certification becomes standard for applicable contracts; Level 3 introduced"],
+          ["Phase 3", "Nov 10, 2027", "Level 2 C3PAO across a broader range; Level 3 DIBCAC assessments for high-priority programs"],
+          ["Phase 4", "Nov 10, 2028", "Full implementation — all applicable DoD contracts require the appropriate CMMC level as a condition of award"]
+        ]
+      },
+
+      { type: "p", text: "The date most CUI-handling contractors should plan around is **November 10, 2026 (Phase 2)** — when mandatory third-party certification becomes standard for applicable contracts. Because achieving Level 2 typically takes 6–12 months of work, the practical message across the industry is that preparation needs to be underway now, not deferred to 2028. This is the 'urgent and current' nature of the topic." },
+
+      { type: "h3", text: "What This Means for the Individual" },
+
+      { type: "p", text: "An engineer doesn't get CMMC-certified personally — the organization does. But the certification rests entirely on individual behavior. Every control CMMC verifies is something people must actually do: use MFA, handle CUI on authorized systems, follow the marking and transmission rules, report incidents. An assessor checking Level 2 compliance is, in effect, checking whether the people in the organization handle CUI the way this entire track describes. Individual discipline is not separate from CMMC compliance — it IS CMMC compliance, observed at the level of daily behavior." }
+    ],
+    quizzes: [
+      {
+        question: "What is the fundamental change CMMC introduces relative to the prior approach?",
+        options: [
+          "It adds assessment and certification — making 'we protect CUI' something contractors increasingly must prove (via self-assessment or third-party certification) rather than merely self-attest",
+          "It replaces NIST 800-171 with an entirely different set of controls",
+          "It eliminates the need to protect CUI for small contractors",
+          "It makes CUI protection voluntary"
+        ],
+        correct: 0,
+        explanation: "Previously contractors largely self-attested to implementing NIST 800-171 with limited verification. CMMC adds assessment and certification: NIST 800-171 says what controls to implement, and CMMC verifies you actually did — via self-assessment for some Level 2 contracts and certified third-party (C3PAO) assessment for others."
+      },
+      {
+        question: "For a typical CUI-handling aerospace contractor, which CMMC level is the target, and what is it aligned to?",
+        options: [
+          "Level 1, aligned to NIST 800-172",
+          "Level 2, aligned to NIST SP 800-171 Revision 2's 110 controls",
+          "Level 3, aligned to FAR 52.204-21",
+          "No level is required for CUI handlers"
+        ],
+        correct: 1,
+        explanation: "Level 2 is the target for CUI handlers, aligned to NIST SP 800-171 Rev 2 (110 controls). Level 1 covers FCI (the broad lower tier, 15 FAR 52.204-21 requirements), and Level 3 is for the highest-sensitivity programs (adding NIST 800-172 controls, DIBCAC-assessed). The central Level 2 question is self-assessment vs. C3PAO certification."
+      },
+      {
+        question: "Which CMMC phase date should most CUI-handling contractors plan around, and why?",
+        options: [
+          "Phase 4 (Nov 2028), because that's when they can finally relax",
+          "Phase 1 (Nov 2025), because nothing is required after that",
+          "Phase 2 (Nov 10, 2026), because mandatory Level 2 third-party (C3PAO) certification becomes standard then — and since achieving Level 2 typically takes 6–12 months, preparation needs to be underway now",
+          "There are no specific dates; CMMC is fully optional"
+        ],
+        correct: 2,
+        explanation: "Phase 2 (Nov 10, 2026) is the key planning date — mandatory Level 2 C3PAO certification becomes standard for applicable contracts, ending reliance on self-attestation for those. Because Level 2 readiness typically takes 6–12 months, the industry message is to prepare now rather than treat Phase 4 (2028) as a grace period."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 4", phaseColor: "#b8860b",
+    title: "Flow-Down & Subcontractors",
+    subtitle: "Prime vs. subcontractor responsibilities, contractual flow-down of CUI obligations, and the broadening reach of the proposed FAR CUI Rule.",
+    time: "30 min", type: "Obligations & Landscape",
+    video: null,
+    resource: { type: "reference", items: [
+      { label: "DFARS 252.204-7012 — flow-down clause, para (m) (eCFR)", url: "https://www.ecfr.gov/current/title-48/chapter-2/subchapter-H/part-252/subpart-252.2/section-252.204-7012" },
+      { label: "32 CFR Part 170 — CMMC Program rule (eCFR)", url: "https://www.ecfr.gov/current/title-32/part-170" }
+    ], expansion: "Flow-down is a contractual mechanism: DFARS 252.204-7012 paragraph (m) requires the prime to include the clause's safeguarding and reporting requirements in subcontracts where a subcontractor will handle covered defense information, and the subcontractor flows it down in turn. CMMC requirements flow down under 32 CFR Part 170 — a subcontractor handling CUI must achieve and maintain its own applicable CMMC status. The CUI carries its protection obligations with it down the supply chain; a sub that cannot demonstrate the required status may be unable to receive CUI and therefore the work. Confirm the specific flow-down terms in your actual contracts with your contracts and security teams." },
+    content: [
+      { type: "p", text: "CUI obligations don't stop at the prime contractor. They flow down the supply chain — and in aerospace, where a program may involve dozens of suppliers and sub-tiers, understanding flow-down is essential. A prime's compliance is only as strong as the weakest sub that touches the CUI." },
+
+      { type: "h3", text: "What Flow-Down Means" },
+
+      { type: "p", text: "**Flow-down** is the contractual mechanism by which obligations in a prime contract are passed to subcontractors. When a prime contract includes CUI handling requirements (DFARS 252.204-7012, CMMC requirements), the prime is obligated to flow those same requirements down to subcontractors who will handle the CUI. The subcontractor, in turn, flows them down to its own sub-tiers. The chain continues as far as the CUI travels." },
+
+      { type: "p", text: "The principle: anyone in the supply chain who handles the CUI must meet the handling and protection obligations — you can't escape the requirements by being a sub-tier rather than the prime. The CUI carries its protection requirements with it wherever it goes." },
+
+      { type: "h3", text: "Prime vs. Subcontractor Responsibilities" },
+
+      { type: "ul", items: [
+        "**The prime** is responsible for flowing requirements down, and bears overall accountability to the government for the contract — including ensuring its subs are appropriately handling CUI. Primes increasingly verify and require evidence of sub compliance (CMMC status, SPRS scores) before sharing CUI.",
+        "**The subcontractor** is responsible for meeting the flowed-down requirements for the CUI it handles — implementing 800-171, achieving the required CMMC level, marking/handling/transmitting correctly, and reporting incidents. A sub handling CUI has the same fundamental obligations as the prime for that CUI.",
+        "**Shared reality:** in 2026, primes are actively flowing down CMMC requirements and requiring subs to demonstrate compliance. A sub that can't show the required CMMC status may find itself unable to receive CUI — and therefore unable to win or keep the work."
+      ]},
+
+      { type: "h3", text: "Managed Service Providers in the Chain" },
+
+      { type: "p", text: "As noted in Lesson 11, MSPs and other service providers that touch CUI are pulled into this web. An MSP doesn't necessarily get independently certified, but its practices are typically within the scope of its client's compliance and assessment — because the MSP's handling of the client's CUI is part of the client's compliance story. The supply chain for CUI compliance includes not just product suppliers but the IT and service providers who touch the data." },
+
+      { type: "h3", text: "The Broadening Reach — The Proposed FAR CUI Rule" },
+
+      { type: "p", text: "Everything above has focused on DoD (DFARS/CMMC). But CUI is a government-wide program, and the third major piece of the framework is extending it across all federal agencies:" },
+
+      { type: "ul", items: [
+        "**The proposed FAR CUI Rule** (published January 15, 2025) would implement the government-wide CUI program in the Federal Acquisition Regulation, applying CUI requirements to contractors of ALL federal executive agencies — not just DoD.",
+        "**It standardizes** designation, handling, and safeguarding across government, introduces reporting and compliance obligations, and defines government and contractor roles via a standard form (referenced as the 'SF XXX') that specifies the CUI involved in a contract.",
+        "**Status:** as of early 2026 it remains a proposed rule moving through the rulemaking process, not yet final. But its direction is clear: CUI obligations are broadening beyond defense to the entire federal contracting space."
+      ]},
+
+      { type: "h3", text: "The Takeaway" },
+
+      { type: "p", text: "CUI compliance is not an island — it's a chain. For an aerospace organization that is both a prime on some programs and a sub on others, the obligations run in both directions: flowing requirements down to your suppliers, and meeting the requirements flowed down to you. And the ground is expanding: what began as a DoD-focused regime is becoming a government-wide expectation. The practical implication for anyone handling CUI is that these obligations are durable and growing, not a passing compliance fad — worth building into how the organization works rather than treating as a checkbox for a single contract. As always, confirm the specific flow-down terms in your actual contracts with your contracts and security teams." }
+    ],
+    quizzes: [
+      {
+        question: "What does 'flow-down' mean in the context of CUI obligations?",
+        options: [
+          "The contractual mechanism by which CUI handling requirements in a prime contract are passed to subcontractors who handle the CUI, and onward to their sub-tiers — the requirements travel with the CUI wherever it goes",
+          "The process of declassifying CUI over time",
+          "The transfer of CUI from the cloud to local storage",
+          "A discount primes give subcontractors for compliance costs"
+        ],
+        correct: 0,
+        explanation: "Flow-down passes prime-contract obligations (DFARS 252.204-7012, CMMC requirements) to subcontractors handling the CUI, who flow them to their own sub-tiers. The CUI carries its protection requirements with it down the supply chain — you can't escape the obligations by being a sub-tier rather than the prime."
+      },
+      {
+        question: "In 2026, what practical consequence does flow-down have for a subcontractor that can't demonstrate required CMMC status?",
+        options: [
+          "None — only primes need CMMC",
+          "It automatically receives a 2-year extension",
+          "It may be unable to receive CUI, and therefore unable to win or keep the work, since primes are actively flowing down CMMC requirements and requiring subs to demonstrate compliance before sharing CUI",
+          "The prime assumes all of the sub's compliance obligations"
+        ],
+        correct: 2,
+        explanation: "Primes are actively flowing down CMMC requirements and requiring subs to show compliance (CMMC status, SPRS scores) before sharing CUI. A sub that can't demonstrate the required status may be unable to receive CUI and thus unable to win or keep the work — making flow-down a business-critical issue, not just a paperwork one."
+      },
+      {
+        question: "What is the significance of the proposed FAR CUI Rule (published January 15, 2025)?",
+        options: [
+          "It eliminates CUI requirements for small businesses",
+          "It makes NIST 800-171 Revision 3 immediately mandatory",
+          "It replaces CMMC entirely",
+          "It would extend CUI requirements across ALL federal executive agencies (not just DoD), standardizing designation/handling/safeguarding government-wide — signaling that CUI obligations are broadening beyond defense, though it remains proposed as of early 2026"
+        ],
+        correct: 3,
+        explanation: "The proposed FAR CUI Rule would implement the government-wide CUI program in the FAR, applying CUI requirements to contractors of all federal executive agencies — not just DoD. It standardizes designation/handling/safeguarding and adds reporting obligations. As of early 2026 it's still a proposed rule, but its direction shows CUI obligations broadening across the entire federal contracting space."
+      }
+    ]
+  },
+
+  {
+    phase: "Phase 4", phaseColor: "#b8860b",
+    title: "Capstone: Map Your CUI Lifecycle",
+    subtitle: "Bring it together. Take a real workflow that touches CUI and walk it end-to-end — identify, mark, handle, transmit, store, report, decontrol — naming the rule at each step.",
+    time: "40 min", type: "Capstone",
+    video: null,
+    resource: { type: "diagram", title: "The CUI Lifecycle — Map It End to End", caption: "Every piece of CUI moves through some subset of these stages. At each step, name the applicable rule and the responsible party — and flag where you would stop and ask your security office.", stages: [
+      { label: "1 · Identify", detail: "Is it CUI? Which category (CTI, Export Control, Proprietary)? Basic or Specified?", color: "#c84b11" },
+      { label: "2 · Mark", detail: "Banner marking, category markings (if Specified), designation indicator, any limited-dissemination controls.", color: "#c84b11" },
+      { label: "3 · Handle / Access", detail: "Need-to-know only (plus authorized-person status if export-controlled). Secure physically when not in use.", color: "#1c4a7a" },
+      { label: "4 · Transmit", detail: "Encrypt in transit, authorized channel only, recipients verified. No personal accounts.", color: "#1a6b3c" },
+      { label: "5 · Store", detail: "Authorized system; FedRAMP-Moderate cloud; NIST 800-171 controls in place.", color: "#1a6b3c" },
+      { label: "6 · Report (if needed)", detail: "Suspected compromise → security office immediately (DFARS 72-hour clock starts at discovery).", color: "#1a6b3c" },
+      { label: "7 · Decontrol / Dispose", detail: "Only by proper authority. Destroy to standard — shred paper, sanitize media.", color: "#b8860b" }
+    ] },
+    content: [
+      { type: "p", text: "This capstone asks you to do what compliance ultimately requires: take a real workflow from your own work that touches CUI and trace it through its entire lifecycle, naming the applicable rule at each stage. The goal isn't to memorize regulations — it's to develop the reflex of seeing the CUI lifecycle in your everyday work and knowing what each step demands." },
+
+      { type: "h3", text: "The Lifecycle Stages" },
+
+      { type: "p", text: "Every piece of CUI moves through some subset of these stages. For your chosen workflow, walk each one:" },
+
+      { type: "ul", items: [
+        "**1. Identify** — Is this CUI? What category (likely CTI, Export Controlled, or Proprietary in aerospace)? Is it Basic or Specified? (Lessons 2–3)",
+        "**2. Mark** — Is it correctly marked — banner, category markings for Specified, designation indicator, any limited-dissemination controls? If you're creating it, are you marking it right? (Lesson 5)",
+        "**3. Handle / Access** — Who has need-to-know? Is access appropriately limited? Is it physically secured when not in use? (Lessons 5–6)",
+        "**4. Transmit** — How does it move? Is the channel authorized and the content encrypted? Are recipients verified for need-to-know (and authorized-person status if export-controlled)? (Lesson 9)",
+        "**5. Store** — Where does it live? Is the system/cloud authorized (FedRAMP Moderate for cloud)? Are the 800-171 controls in place? (Lessons 9–10)",
+        "**6. Report (if needed)** — If something goes wrong, who do you notify, how fast (72 hours for DFARS cyber incidents), and what do you preserve? (Lesson 12)",
+        "**7. Decontrol / Dispose** — When it's no longer needed: is it decontrolled by proper authority, or destroyed to the required standard (shred paper, sanitize media)? (Lessons 5–6)"
+      ]},
+
+      { type: "h3", text: "A Worked Example" },
+
+      { type: "p", text: "**Workflow:** An engineer receives an export-controlled engineering drawing from a prime, incorporates it into a sub-assembly analysis, and shares results with two colleagues and the prime." },
+
+      { type: "ul", items: [
+        "**Identify:** The drawing is marked CUI//SP-EXPT — Export Controlled, CUI Specified. Both CUI safeguarding AND ITAR/EAR access restrictions apply (Lesson 3). Specified means baseline-plus (Lesson 6).",
+        "**Mark:** Preserve the existing markings; the analysis I derive from it inherits CUI status and must carry appropriate markings (Lesson 5). When unsure how to mark the derived analysis, ask the security office.",
+        "**Handle:** Only colleagues with need-to-know AND authorized-person status (for the export-controlled content) may access it. A foreign-person colleague — even one I trust and work with daily — cannot, regardless of need-to-know (Lessons 3, 6).",
+        "**Transmit:** Encrypted, via an authorized channel, to verified recipients only. Confirm the prime's recipient and my two colleagues are all authorized persons before sending. No personal accounts (Lesson 9).",
+        "**Store:** In the organization's authorized CUI environment (e.g., a FedRAMP-Moderate-authorized or appropriately-tiered system for export-controlled data), not a personal drive (Lessons 9–10).",
+        "**Report:** If I realize I sent it to the wrong recipient or a possible compromise occurs, I report to the security office immediately — discovery starts the organization's 72-hour clock (Lesson 12).",
+        "**Decontrol/Dispose:** I don't decide on my own that it's decontrolled. When the working copies are no longer needed, I destroy them to standard — shred paper, sanitize any media (Lessons 5–6)."
+      ]},
+
+      { type: "h3", text: "What 'Done' Looks Like" },
+
+      { type: "p", text: "A good capstone analysis reads like a compliance walkthrough an auditor would nod at: for your real workflow, every stage is named, the applicable rule is identified, the responsible party is clear, and the points where you'd stop and ask the security office are flagged. If you can produce that for a workflow you actually perform, you've internalized the track — you can now look at any CUI-touching task and see its full lifecycle and obligations." },
+
+      { type: "h3", text: "Closing" },
+
+      { type: "p", text: "CUI handling rarely feels dramatic — it's emails, files, drawings, and the quiet discipline of doing the routine thing correctly. That ordinariness is exactly why it matters: the incidents come not from spies but from a misdirected email, an unencrypted send, a tossed draft, a convenient consumer cloud. The engineer who internalizes this track doesn't need to look up the rules each time — they've developed the reflex to recognize CUI, handle it correctly, and pause-and-ask when something's unclear. That reflex, applied consistently across a career of routine actions, is what actually protects controlled information." },
+
+      { type: "p", text: "**Final reminder:** this track is training, not legal or compliance advice, and the regulations it describes are actively evolving. Use it to build understanding and good instincts — and always confirm specific requirements against current regulations, your contracts, and your security and compliance professionals. When in doubt, the safest action in this domain is always the same: stop, and ask your security office." }
+    ],
+    quizzes: [
+      {
+        question: "In the capstone's worked example, a foreign-person colleague the engineer trusts and works with daily wants access to the export-controlled drawing. Can they have it?",
+        options: [
+          "Yes, because they're a trusted colleague with need-to-know",
+          "No — for export-controlled CUI, authorized-person status (governed by ITAR/EAR) is required in addition to need-to-know; trust and daily collaboration don't satisfy the export-control access restriction",
+          "Yes, as long as the engineer encrypts the file first",
+          "Yes, because internal colleagues are always authorized"
+        ],
+        correct: 1,
+        explanation: "Export-controlled CUI carries both CUI rules AND export-control (ITAR/EAR) access restrictions. A foreign-person colleague cannot access it regardless of need-to-know or trust, because the export-control regime restricts access by nationality. Need-to-know alone is insufficient; authorized-person status is also required — the two regimes apply simultaneously (Lesson 3)."
+      },
+      {
+        question: "What does a well-done capstone lifecycle analysis demonstrate?",
+        options: [
+          "Memorization of every CFR citation",
+          "That CUI handling can be fully automated without human judgment",
+          "For a real workflow, every stage is named, the applicable rule identified, the responsible party clear, and the points to stop and ask the security office flagged — showing the reflex to see a CUI task's full lifecycle and obligations",
+          "That the engineer can personally decontrol any CUI they hold"
+        ],
+        correct: 2,
+        explanation: "The capstone isn't about memorizing citations — it's developing the reflex to see the full CUI lifecycle in real work: naming each stage, identifying the applicable rule, knowing who's responsible, and flagging where to stop and ask. Producing that for a workflow you actually perform is the evidence you've internalized the track."
+      },
+      {
+        question: "According to the closing, where do CUI incidents most often actually come from?",
+        options: [
+          "Ordinary routine actions gone wrong — a misdirected email, an unencrypted send, a tossed draft, a convenient consumer cloud — which is why the protective reflex applied to routine work is what matters",
+          "Sophisticated foreign espionage operations",
+          "Deliberate insider threats in nearly all cases",
+          "Failures of the classified information system"
+        ],
+        correct: 0,
+        explanation: "CUI incidents come not from spies but from mundane routine actions: misdirected emails, unencrypted sends, tossed drafts, convenient consumer clouds. That ordinariness is why the quiet discipline matters — the engineer who develops the reflex to recognize CUI, handle it correctly, and pause-and-ask when unclear is what actually protects controlled information across a career of routine actions."
+      }
+    ]
+  }
+];
+
+const CUI_FINAL_EXAM =
+[
+  { phase: 1, question: "What problem did the CUI Program solve?", options: [
+    "It replaced a patchwork of 100+ inconsistent agency markings (FOUO, SBU, etc.) with one standardized framework",
+    "It created new classification levels above Top Secret",
+    "It made all government information public",
+    "It eliminated the need to protect sensitive information"
+  ], correct: 0, explanation: "CUI replaced the chaotic pre-2010 patchwork of over 100 inconsistent agency-specific markings with a single standardized system — one framework, one set of rules, one registry." },
+
+  { phase: 1, question: "What is a 'deemed export' in the context of export-controlled CUI?", options: [
+    "Shipping a physical defense article overseas",
+    "An export estimated rather than precisely measured",
+    "Releasing controlled technical data to a foreign person — even inside the U.S. or your own facility — which is treated as an export to that person's country of nationality",
+    "An export pre-approved by Customs"
+  ], correct: 2, explanation: "A deemed export is the release of controlled technical data to a foreign person regardless of location — e.g., showing an ITAR-controlled drawing to a foreign-national colleague in a U.S. office is 'deemed' an export to their home country. Access itself can be the violation; no physical shipment is required." },
+
+  { phase: 1, question: "A foreign-national colleague has legitimate need-to-know for an ITAR-controlled drawing. Can they access it on that basis?", options: [
+    "Yes — need-to-know is the governing standard for all controlled information",
+    "Not on need-to-know alone — export law also requires they be an authorized person (license or recognized exemption); need-to-know never overrides the export-control access restriction",
+    "Yes, if the drawing is encrypted first",
+    "Yes, because internal colleagues are automatically authorized"
+  ], correct: 1, explanation: "CUI handling says share with those who need to know; export control adds 'and only if also an authorized person under the regime.' Both must be met. A foreign national can have genuine need-to-know and still be barred absent a license/exemption — verify with the export-control officer before granting access." },
+
+  { phase: 1, question: "Which entity is the Executive Agent for the CUI Program?", options: [
+    "DoD",
+    "NIST",
+    "NARA (National Archives and Records Administration)",
+    "CISA"
+  ], correct: 2, explanation: "NARA is the designated Executive Agent, maintaining the CUI Registry. DoD enforces CUI for its contractors via DFARS/CMMC; NIST provides the technical standard (800-171)." },
+
+  { phase: 1, question: "When does a contractor become subject to CUI rules?", options: [
+    "When it collects, develops, receives, transmits, uses, handles, or stores CUI during contract performance",
+    "Only with a facility security clearance",
+    "Only after CMMC Level 3 certification",
+    "Never; rules apply only to federal employees"
+  ], correct: 0, explanation: "32 CFR 2002 reaches contractors who handle CUI in any of those ways during contract performance. No clearance is needed for information to be CUI." },
+
+  { phase: 1, question: "The authoritative public catalog of CUI categories is:", options: [
+    "The DoD CUI Database",
+    "The NARA CUI Registry (archives.gov/cui)",
+    "The NIST Control Catalog",
+    "The Federal Register index"
+  ], correct: 1, explanation: "NARA maintains the CUI Registry as the single authoritative source listing every approved category, its basis, marking, and handling requirements." },
+
+  { phase: 1, question: "Can an agency invent its own CUI category not in the registry?", options: [
+    "Yes, as needed",
+    "Yes, with DoD approval",
+    "No — the registry is the closed authoritative list; if it isn't in the registry, it isn't CUI",
+    "Only for national defense information"
+  ], correct: 2, explanation: "The registry is a closed governing list; agencies cannot invent categories. That ad hoc invention was exactly the pre-CUI problem the program eliminated." },
+
+  { phase: 1, question: "What distinguishes CUI Basic from CUI Specified?", options: [
+    "Basic is classified, Specified is not",
+    "Basic is permanent, Specified is temporary",
+    "Basic is for contractors only",
+    "Basic follows the uniform 32 CFR 2002 baseline; Specified has particular controls dictated by its authorizing law/regulation beyond the baseline"
+  ], correct: 3, explanation: "Both are unclassified. Basic gets the standard baseline; Specified must follow the specific controls its authorizing authority prescribes. Treating Specified as Basic under-protects it." },
+
+  { phase: 1, question: "Which is the everyday 'bread and butter' CUI category in aerospace engineering?", options: [
+    "Controlled Technical Information (CTI)",
+    "Privacy/PII",
+    "Law Enforcement Sensitive",
+    "Financial Records"
+  ], correct: 0, explanation: "CTI covers technical data with military/space application — drawings, specifications, test data — which aerospace engineering organizations handle constantly." },
+
+  { phase: 1, question: "How does CUI differ from classified information?", options: [
+    "CUI is a level of classified information",
+    "CUI is unclassified — no clearance needed, handled on secured business systems, governed by 32 CFR 2002, a separate regime from classified (EO 13526)",
+    "CUI is more sensitive than Top Secret",
+    "There is no difference"
+  ], correct: 1, explanation: "CUI is genuinely unclassified — a separate regime from classified. No clearance, secured business systems, 32 CFR 2002 framework. 'Unclassified' means different mandatory protections, not none." },
+
+  { phase: 1, question: "How do FCI and CUI relate?", options: [
+    "They are identical",
+    "CUI is broader than FCI",
+    "FCI is the broader, lower-sensitivity tier (basic safeguarding, FAR 52.204-21); CUI is the more sensitive tier requiring fuller NIST 800-171 protection",
+    "FCI is classified, CUI is not"
+  ], correct: 2, explanation: "FCI is the broad floor (non-public contract info, 15 basic safeguards); CUI is the elevated, more sensitive tier requiring NIST 800-171. Not all FCI rises to CUI." },
+
+  { phase: 1, question: "An export-controlled engineering drawing is subject to which rules?", options: [
+    "Only ITAR/EAR",
+    "Only CUI safeguarding",
+    "Neither",
+    "Both CUI safeguarding AND export-control access restrictions simultaneously — satisfying one does not satisfy the other"
+  ], correct: 3, explanation: "Export-controlled data is both a CUI category and subject to ITAR/EAR. CUI rules govern marking/safeguarding; export law restricts foreign-person access and export. Both apply at once." },
+
+  { phase: 1, question: "What distinguishes CUI from a company's ordinary proprietary information?", options: [
+    "The government nexus — CUI is created/possessed by or for the government with an authorizing law/regulation/policy requiring control; ordinary proprietary info lacks that basis",
+    "CUI is more valuable",
+    "Proprietary info needs encryption, CUI doesn't",
+    "Nothing; the terms are interchangeable"
+  ], correct: 0, explanation: "Confidentiality alone isn't enough — CUI requires a government relationship plus an authorizing basis. Internal pricing strategy is proprietary but not CUI; a contract-designated technical report may be CUI." },
+
+  { phase: 2, question: "What does the CUI banner marking contain at minimum, and where?", options: [
+    "The author's name on the last page",
+    "The control marking 'CUI' at the top and bottom of each page containing CUI",
+    "A classification level in the page center",
+    "The contract number on the cover only"
+  ], correct: 1, explanation: "The banner carries 'CUI' at minimum, top and bottom of each CUI page. For Specified it extends with category markings and any limited-dissemination controls set off by double slashes." },
+
+  { phase: 2, question: "In a banner like 'CUI//SP-CTI', what does the portion after the slashes indicate?", options: [
+    "The page number",
+    "The author's initials",
+    "The category/subcategory marking for CUI Specified (here, Specified Controlled Technical Information)",
+    "The destruction date"
+  ], correct: 2, explanation: "Double forward slashes set off category markings for CUI Specified. 'SP-CTI' denotes Specified Controlled Technical Information; the registry provides correct category abbreviations." },
+
+  { phase: 2, question: "What is the purpose of the designation indicator?", options: [
+    "To state the expiration date",
+    "To indicate a classification level",
+    "To list all authorized readers",
+    "To identify who designated the CUI and provide a point of contact, enabling accountability and traceability"
+  ], correct: 3, explanation: "The designation indicator identifies the designating agency/office and a point of contact, so any holder can determine where control originated and whom to ask about handling or decontrol." },
+
+  { phase: 2, question: "Is portion marking required for CUI?", options: [
+    "Generally permitted but not required by default, though specific agencies or contracts may require it",
+    "Always required, like classified information",
+    "Never permitted",
+    "Required only for CUI Basic"
+  ], correct: 0, explanation: "Unlike classified (mandatory portion marking), CUI portion marking is generally optional by default but may be required by specific agency or contract guidance; it helps when a document mixes CUI and non-CUI." },
+
+  { phase: 2, question: "A contractor receives CUI that appears mismarked. What should they do?", options: [
+    "Correct the marking themselves",
+    "Raise it with the security office rather than acting on the wrong marking or unilaterally re-marking it",
+    "Handle it as marked and ignore the discrepancy",
+    "Delete it"
+  ], correct: 1, explanation: "A suspected mismarking is a security-office matter — don't act on the wrong marking (risking under-protection) or self-correct it. The marking is the handling instruction set." },
+
+  { phase: 2, question: "Why does treating CUI Specified as Basic constitute a compliance failure?", options: [
+    "Specified is classified",
+    "Basic requires more protection than Specified",
+    "Because Specified has particular controls beyond the baseline; applying only the baseline under-protects the information",
+    "Specified can't be handled by contractors"
+  ], correct: 2, explanation: "Specified exists because its authorizing authority prescribes controls beyond the baseline. Applying only the baseline under-protects it — a genuine failure. Check the registry and authority for the specifics." },
+
+  { phase: 2, question: "A contractor thinks received CUI is 'probably old enough not to matter.' Correct stance?", options: [
+    "Treat it as decontrolled",
+    "Email a colleague for a second opinion",
+    "Destroy it immediately",
+    "It remains CUI until authoritatively decontrolled by the proper authority; a contractor can't unilaterally decontrol received CUI"
+  ], correct: 3, explanation: "Decontrol is a formal process, generally the designating authority's decision. Until authoritatively decontrolled, it stays CUI. 'I think it's old enough' is not decontrol." },
+
+  { phase: 2, question: "What are limited dissemination controls (LDCs)?", options: [
+    "Additional markings that further restrict who may receive CUI beyond standard need-to-know, overriding the default and must be honored",
+    "Markings allowing sharing with anyone",
+    "A type of encryption",
+    "Controls applying only to classified info"
+  ], correct: 0, explanation: "LDCs (visible in the banner) restrict dissemination beyond need-to-know — e.g., to specific groups or requiring originator approval. They override the permissive default and must be honored." },
+
+  { phase: 2, question: "What does 'need-to-know' mean for sharing CUI internally?", options: [
+    "Anyone at the same company may access it",
+    "The person needs that specific information for an authorized function — not merely that they work there",
+    "Anyone who asks has need-to-know",
+    "Only executives qualify"
+  ], correct: 1, explanation: "Need-to-know is 'needs this specific information for an authorized purpose,' not 'works here' or 'is generally trustworthy.' Internal over-sharing is a common, underestimated failure." },
+
+  { phase: 2, question: "How must paper CUI be disposed of?", options: [
+    "In regular recycling",
+    "Stored forever",
+    "Destroyed to be unreadable, indecipherable, and irrecoverable — e.g., cross-cut shredding to the required standard",
+    "Torn in half and discarded"
+  ], correct: 2, explanation: "CUI must be destroyed to render it unrecoverable (cross-cut shredding for paper). Trash/recycling and mere tearing are failures; electronic media require sanitization per guidance like NIST 800-88." },
+
+  { phase: 2, question: "What is the shared-printer hazard for CUI?", options: [
+    "Printers use too much toner on CUI",
+    "CUI cannot be printed at all",
+    "Printers can't render CUI markings",
+    "CUI sent to a communal printer and not retrieved promptly is exposed to everyone who passes — retrieve immediately and use secure-print where available"
+  ], correct: 3, explanation: "Unretrieved CUI at a shared printer is exposed to all passersby. Retrieve printouts immediately and use secure-print features — a classic mundane physical-handling failure." },
+
+  { phase: 2, question: "What is the common thread behind most CUI handling mistakes?", options: [
+    "Convenience shortcuts and casual assumptions — being helpful, fast, or tidy — not deliberate acts",
+    "Deliberate malice",
+    "Lack of any written rules",
+    "IT system failures"
+  ], correct: 0, explanation: "Most mistakes are convenience shortcuts: cc-ing to be helpful, emailing unencrypted to be fast, tossing a draft to tidy up. Discipline means resisting the frictionless wrong action." },
+
+  { phase: 2, question: "Why is 'commingling' a handling failure?", options: [
+    "CUI must be stored alone in a dedicated building",
+    "Mixing CUI with non-CUI without proper marking can hide the CUI, or dumping CUI into unauthorized systems places it where required protections don't exist",
+    "CUI files are too large to combine",
+    "It only matters for classified info"
+  ], correct: 1, explanation: "Commingling makes CUI invisible/unmarked or drops it into unauthorized locations lacking protections, so people handle it unaware. Fix: authorized locations, proper marking of mixed docs, no unapproved tools." },
+
+  { phase: 3, question: "What is the baseline expectation for transmitting CUI digitally?", options: [
+    "Plaintext is fine if labeled 'CUI'",
+    "Encryption only if also classified",
+    "Encrypted in transit using cryptography meeting the federal standard — FIPS-validated encryption is the benchmark NIST 800-171 references",
+    "Encryption is never required"
+  ], correct: 2, explanation: "CUI must be protected in transit via encryption meeting the applicable federal standard — FIPS-validated is the benchmark NIST 800-171 points to. Plaintext across the open internet is unacceptable." },
+
+  { phase: 3, question: "Why is email the highest-risk channel for CUI?", options: [
+    "Email servers can't handle CUI at all",
+    "CUI can never be emailed",
+    "Email is slower than other methods",
+    "It's frictionless to get wrong — unencrypted sends, personal accounts, wrong recipients via reply-all/autocomplete, CUI in attachments or expanding threads"
+  ], correct: 3, explanation: "Email causes the most CUI incidents because errors are so easy: unencrypted, personal accounts, wrong recipients, CUI hidden in attachments or forwarded threads. It can be used when encrypted, authorized, and recipient-scrutinized." },
+
+  { phase: 3, question: "Correct approach to CUI on portable media (USB drives)?", options: [
+    "Data encrypted and media physically controlled; many organizations restrict/prohibit removable media for CUI, so follow your (possibly stricter) policy",
+    "Always fine if it's a new drive",
+    "No encryption needed since not networked",
+    "Just a password-protected folder"
+  ], correct: 0, explanation: "Removable media is a loss vector — encrypt the data and physically control the device so loss isn't automatic CUI loss. Many organizations restrict/prohibit it for CUI; org policy (possibly stricter) governs." },
+
+  { phase: 3, question: "When CUI travels by physical mail, you should:", options: [
+    "Label the outside 'CUI' prominently",
+    "Use packaging that doesn't reveal contents/markings externally and accountable carriers as sensitivity warrants — don't advertise CUI on the exterior",
+    "Send it in a clear envelope",
+    "Use only regular first-class mail"
+  ], correct: 1, explanation: "Physical CUI needs protective packaging (opaque, no external markings revealing contents) and tracked/accountable carriers as warranted. The exterior shouldn't advertise that it contains CUI." },
+
+  { phase: 3, question: "What is NIST SP 800-171?", options: [
+    "A list of classified handling rules",
+    "A cloud service",
+    "The standard specifying security requirements for protecting CUI in nonfederal systems — a tailored subset of NIST 800-53, contractually required via DFARS 252.204-7012",
+    "An encryption algorithm"
+  ], correct: 2, explanation: "800-171 ('Protecting CUI in Nonfederal Systems') specifies the controls a contractor's systems must meet to protect CUI, derived from 800-53, required for defense contractors through DFARS 252.204-7012." },
+
+  { phase: 3, question: "Which NIST 800-171 revision is the enforced standard for CMMC as of early 2026?", options: [
+    "Revision 3, the newest",
+    "Neither applies to CMMC",
+    "Both equally",
+    "Revision 2 (110 requirements, 14 families) — DoD has not authorized Rev 3 for scoring/SPRS/assessments; contractors continue on Rev 2 under a Class Deviation"
+  ], correct: 3, explanation: "Rev 2 (110 controls, 14 families) is enforced. Rev 3 was finalized May 2024 (97 requirements, new families, ODPs) but DoD hasn't authorized it for scoring, SPRS, or assessments. Transition comes via future rulemaking." },
+
+  { phase: 3, question: "How many security requirements and control families does the enforced NIST 800-171 Rev 2 have?", options: [
+    "110 requirements, 14 families",
+    "97 requirements, 17 families",
+    "53 requirements, 4 families",
+    "800 requirements, 53 families"
+  ], correct: 0, explanation: "Rev 2 has 110 requirements across 14 control families. Rev 3 reduced this to 97 across new groupings, but Rev 2 is the enforced standard for CMMC." },
+
+  { phase: 3, question: "Why is aligning solely to NIST 800-171 Rev 3 today a risk for a DoD contractor?", options: [
+    "Rev 3 is less secure",
+    "Assessments are still conducted against Rev 2 — aligning only to Rev 3 could show 'unmet' Rev 2 requirements and fail an assessment",
+    "Rev 3 is illegal before 2028",
+    "No risk; they're interchangeable"
+  ], correct: 1, explanation: "CMMC benchmarks against Rev 2, so a Rev-3-only posture could show 'unmet' Rev 2 requirements and fail. Comply with Rev 2 now (keep SSP/POA&M/SPRS on Rev 2) while tracking Rev 3 for the eventual transition." },
+
+  { phase: 3, question: "How should an individual engineer view the 800-171 controls they encounter (MFA, access limits)?", options: [
+    "Arbitrary IT annoyances to bypass",
+    "Optional suggestions for IT only",
+    "The literal mechanism of CUI compliance — defeating them (e.g., emailing CUI to personal Gmail) breaks a stack of controls at once",
+    "Relevant only during audits"
+  ], correct: 2, explanation: "The controls engineers live inside daily are the actual mechanism of CUI protection. Recognizing this helps people work with them; the 'email CUI to personal Gmail' shortcut defeats a whole stack of controls instantly." },
+
+  { phase: 3, question: "When a cloud service stores, processes, or transmits CUI, the provider must meet:", options: [
+    "Any commercial certification",
+    "No specific requirement if data is encrypted",
+    "Just an SSL certificate",
+    "The FedRAMP Moderate Baseline (or equivalent) — the standardized authorization level relevant to CUI"
+  ], correct: 3, explanation: "A cloud provider handling CUI must meet FedRAMP Moderate Baseline (or equivalent), per the proposed FAR CUI Rule. You can't use any convenient consumer cloud — it must be authorized to the appropriate level." },
+
+  { phase: 3, question: "Under the cloud shared-responsibility model, why is a FedRAMP-authorized cloud necessary but not sufficient?", options: [
+    "The provider secures the cloud infrastructure, but the customer secures their use of it (config, access, data handling) — you can still mishandle CUI inside a compliant environment",
+    "Authorization expires every 30 days",
+    "Authorized clouds are less secure than on-prem",
+    "The provider handles everything"
+  ], correct: 0, explanation: "Security is shared: the provider's FedRAMP authorization covers the infrastructure; the customer remains responsible for configuration, access, and data handling. You can mishandle CUI inside a perfectly compliant cloud." },
+
+  { phase: 3, question: "Under DFARS 252.204-7012, the cyber incident reporting timeframe is:", options: [
+    "30 days",
+    "Rapidly — within 72 hours of discovery — to the designated DoD mechanism",
+    "End of the contract",
+    "Only if data theft is confirmed"
+  ], correct: 1, explanation: "DFARS 252.204-7012 requires reporting within 72 hours of discovery to the official DoD mechanism, plus preserving system images and monitoring data. The tight window enables coordinated response." },
+
+  { phase: 3, question: "Does a reportable cyber incident require confirmed exfiltration of CUI?", options: [
+    "Yes, you must prove theft first",
+    "Only physical device theft counts",
+    "No — it includes potential compromise; a credible incident affecting CUI-bearing systems triggers the obligation without waiting for certainty",
+    "Only business-hours incidents count"
+  ], correct: 2, explanation: "The clause covers actions that compromise OR potentially compromise covered defense information. You don't wait for confirmed exfiltration — a credible incident on CUI-bearing systems triggers reporting." },
+
+  { phase: 3, question: "An engineer realizes they emailed CUI to the wrong external recipient. Correct first action?", options: [
+    "Quietly delete the sent email and hope no one noticed",
+    "Ask the recipient to delete it and consider it closed",
+    "Wait to see if the recipient says anything",
+    "Report immediately to the security office/incident response without delay — the real failure is silence, not the human error"
+  ], correct: 3, explanation: "Report immediately and internally — discovery starts the organization's 72-hour clock, and individuals usually notice first. Quietly fixing it delays formal response; organizations prefer a prompt report to a hidden incident." },
+
+  { phase: 4, question: "What fundamental change does CMMC introduce?", options: [
+    "It adds assessment/certification — contractors increasingly must prove CUI protection (self-assessment or third-party certification) rather than merely self-attest",
+    "It replaces NIST 800-171 with different controls",
+    "It eliminates CUI protection for small contractors",
+    "It makes CUI protection voluntary"
+  ], correct: 0, explanation: "CMMC adds verification: NIST 800-171 says what to implement; CMMC verifies you did — via self-assessment for some Level 2 contracts and certified third-party (C3PAO) assessment for others." },
+
+  { phase: 4, question: "Which CMMC level applies to CUI handlers, and what is it aligned to?", options: [
+    "Level 1, aligned to NIST 800-172",
+    "Level 2, aligned to NIST SP 800-171 Rev 2's 110 controls",
+    "Level 3, aligned to FAR 52.204-21",
+    "No level applies to CUI"
+  ], correct: 1, explanation: "Level 2 (CUI) aligns to NIST 800-171 Rev 2 (110 controls). Level 1 covers FCI (15 FAR 52.204-21 safeguards); Level 3 is highest-sensitivity (adds NIST 800-172, DIBCAC-assessed)." },
+
+  { phase: 4, question: "What regulation establishes the CMMC program structure?", options: [
+    "48 CFR Part 52",
+    "Executive Order 13556",
+    "32 CFR Part 170 (the 'program rule', effective December 2024)",
+    "ISO 27001"
+  ], correct: 2, explanation: "32 CFR Part 170 is the CMMC program rule (effective Dec 2024), made contractually enforceable through the DFARS acquisition rule (48 CFR) effective November 10, 2025." },
+
+  { phase: 4, question: "What is the difference between self-assessment and a C3PAO assessment for CMMC Level 2?", options: [
+    "They are identical",
+    "Self-assessment is illegal",
+    "C3PAO is only for Level 1",
+    "Self-assessment: the contractor assesses and an official affirms; C3PAO: a Certified Third-Party Assessment Organization independently assesses and certifies — required for some Level 2 contracts"
+  ], correct: 3, explanation: "Some Level 2 contracts permit self-assessment (documented in SSP/SPRS, officially affirmed); others require independent C3PAO certification, removing self-attestation as the basis." },
+
+  { phase: 4, question: "What is the constraint on POA&Ms (Plans of Action and Milestones) under CMMC?", options: [
+    "Limited number of open items allowed at award, requiring closure within 180 days",
+    "Unlimited open items forever",
+    "POA&Ms are prohibited",
+    "POA&Ms must close within 24 hours"
+  ], correct: 0, explanation: "CMMC allows POA&Ms for fixing gaps but constrains them: limited open items at award, closed within 180 days. They can't be an indefinite excuse for non-compliance." },
+
+  { phase: 4, question: "When did CMMC Phase 1 begin, and what did it require?", options: [
+    "Jan 2024; full Level 3 certification",
+    "November 10, 2025; Level 1/2 self-assessments as pre-award conditions (with Level 2 C3PAO at DoD discretion for select contracts)",
+    "November 2028; nothing yet",
+    "2030; voluntary only"
+  ], correct: 1, explanation: "Phase 1 began November 10, 2025 (the 48 CFR effective date), requiring Level 1/2 self-assessments as pre-award conditions, with DoD discretion to require Level 2 C3PAO for select contracts." },
+
+  { phase: 4, question: "Which CMMC phase date should most CUI-handling contractors plan around, and why?", options: [
+    "Phase 4 (Nov 2028), to relax until then",
+    "Phase 1 (Nov 2025), since nothing follows",
+    "Phase 2 (Nov 10, 2026) — mandatory Level 2 C3PAO certification becomes standard, and Level 2 readiness typically takes 6–12 months",
+    "No dates; CMMC is optional"
+  ], correct: 2, explanation: "Phase 2 (Nov 10, 2026) is the key date — mandatory Level 2 C3PAO certification for applicable contracts. Since readiness takes 6–12 months, preparation must be underway now, not deferred to 2028." },
+
+  { phase: 4, question: "What does 'flow-down' mean for CUI obligations?", options: [
+    "Declassifying CUI over time",
+    "A compliance-cost discount",
+    "Moving CUI from cloud to local storage",
+    "The contractual mechanism passing prime-contract CUI requirements to subcontractors who handle the CUI, and onward to sub-tiers — requirements travel with the CUI"
+  ], correct: 3, explanation: "Flow-down passes obligations (DFARS 7012, CMMC) from prime to subs handling CUI, then to their sub-tiers. The CUI carries its requirements down the chain — you can't escape them by being a sub-tier." },
+
+  { phase: 4, question: "Practical consequence for a 2026 subcontractor that can't show required CMMC status?", options: [
+    "It may be unable to receive CUI and thus unable to win/keep the work, since primes flow down CMMC requirements and require subs to demonstrate compliance",
+    "None; only primes need CMMC",
+    "Automatic 2-year extension",
+    "The prime assumes its obligations"
+  ], correct: 0, explanation: "Primes are flowing down CMMC requirements and requiring proof (CMMC status, SPRS) before sharing CUI. A sub that can't demonstrate it may be unable to receive CUI — making flow-down business-critical." },
+
+  { phase: 4, question: "What would the proposed FAR CUI Rule (Jan 15, 2025) do?", options: [
+    "Eliminate CUI rules for small business",
+    "Extend CUI requirements across ALL federal executive agencies (not just DoD), standardizing designation/handling/safeguarding government-wide — still proposed as of early 2026",
+    "Replace CMMC entirely",
+    "Make NIST 800-171 Rev 3 immediately mandatory"
+  ], correct: 1, explanation: "The proposed FAR CUI Rule would implement the government-wide CUI program in the FAR for contractors of all federal agencies, standardizing the program and adding reporting obligations. Still proposed as of early 2026." },
+
+  { phase: 4, question: "An MSP provides cloud/security services touching a contractor's CUI. How does CMMC treat it?", options: [
+    "The MSP is entirely separate from the contractor's compliance",
+    "The MSP must be classified",
+    "The MSP is typically pulled into the scope of the contractor's compliance and assessment, since its handling of the CUI is part of the contractor's compliance story",
+    "MSPs are exempt from all CUI rules"
+  ], correct: 2, explanation: "An MSP touching CUI is generally within the scope of its client's compliance and assessment — its practices must support the contractor's obligations. The CUI supply chain includes IT/service providers, not just product suppliers." },
+
+  { phase: 4, question: "In the capstone example, can a trusted foreign-person colleague access an export-controlled drawing on need-to-know alone?", options: [
+    "Yes, trust plus need-to-know suffices",
+    "Yes, internal colleagues are always authorized",
+    "Yes, if the file is encrypted first",
+    "No — export-controlled CUI requires authorized-person status under ITAR/EAR in addition to need-to-know; nationality-based restrictions apply regardless of trust"
+  ], correct: 3, explanation: "Export-controlled CUI carries both CUI rules and export-control access restrictions. A foreign-person colleague can't access it regardless of need-to-know or trust — the export regime restricts access by nationality. Both regimes apply at once." },
+
+  { phase: 4, question: "According to the capstone closing, where do CUI incidents most often come from?", options: [
+    "Ordinary routine actions gone wrong — a misdirected email, an unencrypted send, a tossed draft, a convenient consumer cloud — so the protective reflex in routine work is what matters",
+    "Sophisticated foreign espionage",
+    "Deliberate insider threats in nearly all cases",
+    "Failures of the classified system"
+  ], correct: 0, explanation: "Incidents come from mundane routine actions, not spies: misdirected emails, unencrypted sends, tossed drafts, consumer clouds. The reflex to recognize CUI, handle it correctly, and pause-and-ask is what protects it over a career." }
+];
+
+const { useState, useMemo } = React;
+
+// ─── Theme ───
+const DARK="#1a1208",CREAM="#f5f0e8",BURNT="#c84b11",PANEL="#241a10",BORDER="rgba(245,240,232,0.12)",MUTED="#b8a98f";
+const FD="'Bebas Neue','Barlow',system-ui,sans-serif",FB="'Barlow',Georgia,serif";
+const PASS_PCT = 0.85;
+const EXAM_TOTAL = CUI_FINAL_EXAM.length;
+const PASS_SCORE = Math.ceil(EXAM_TOTAL * PASS_PCT);
+
+// ─── localStorage helpers (graceful if blocked) ───
+function lsGet(k,d){ try { const v=localStorage.getItem(k); return v===null?d:v; } catch { return d; } }
+function lsSet(k,v){ try { localStorage.setItem(k,v); } catch {} }
+
+function renderInline(text){
+  const parts=text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
+  return parts.map((p,i)=>{
+    if(p.startsWith("**")&&p.endsWith("**"))return <strong key={i} style={{color:CREAM}}>{p.slice(2,-2)}</strong>;
+    const lk=p.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if(lk)return <a key={i} href={lk[2]} target="_blank" rel="noopener noreferrer" style={{color:"#e8a87c",textDecoration:"underline"}}>{lk[1]}</a>;
+    return <span key={i}>{p}</span>;
+  });
+}
+
+function ContentBlock({block:b}){
+  if(b.type==="p")return <p style={{lineHeight:1.7,margin:"0 0 16px",color:"#e8ddc9"}}>{renderInline(b.text)}</p>;
+  if(b.type==="h3")return <h3 style={{fontFamily:FD,letterSpacing:"0.04em",fontSize:24,color:BURNT,margin:"28px 0 12px",textTransform:"uppercase"}}>{b.text}</h3>;
+  if(b.type==="ul")return <ul style={{margin:"0 0 16px",paddingLeft:22}}>{b.items.map((it,i)=><li key={i} style={{lineHeight:1.65,margin:"0 0 10px",color:"#e8ddc9"}}>{renderInline(it)}</li>)}</ul>;
+  if(b.type==="table")return(
+    <div style={{overflowX:"auto",margin:"0 0 20px"}}>
+      <table style={{borderCollapse:"collapse",width:"100%",fontSize:14}}>
+        <thead><tr>{b.headers.map((h,i)=><th key={i} style={{textAlign:"left",padding:"10px 12px",borderBottom:`2px solid ${BURNT}`,color:BURNT,fontFamily:FD,letterSpacing:"0.03em",fontSize:16}}>{h}</th>)}</tr></thead>
+        <tbody>{b.rows.map((r,ri)=><tr key={ri}>{r.map((c,ci)=><td key={ci} style={{padding:"10px 12px",borderBottom:`1px solid ${BORDER}`,color:"#e8ddc9",verticalAlign:"top"}}>{renderInline(c)}</td>)}</tr>)}</tbody>
+      </table>
+    </div>);
+  return null;
+}
+
+function Quiz({quiz,idx}){
+  const [picked,setPicked]=useState(null);
+  const letters=["A","B","C","D"];
+  return(
+    <div style={{border:`1px solid ${BORDER}`,borderRadius:10,padding:"18px 20px",margin:"0 0 16px",background:"rgba(0,0,0,0.18)"}}>
+      <div style={{fontWeight:700,color:CREAM,marginBottom:14,lineHeight:1.5}}>
+        <span style={{color:BURNT,fontFamily:FD,marginRight:8,fontSize:18}}>Q{idx+1}.</span>{quiz.question}
+      </div>
+      <div style={{display:"flex",flexDirection:"column",gap:8}}>
+        {quiz.options.map((opt,i)=>{
+          const isPicked=picked===i,isCorrect=i===quiz.correct;
+          let bg="rgba(245,240,232,0.04)",bd=BORDER,col="#e8ddc9";
+          if(picked!==null){if(isCorrect){bg="rgba(26,107,60,0.25)";bd="#1a6b3c";col=CREAM;}else if(isPicked){bg="rgba(200,75,17,0.18)";bd=BURNT;col=CREAM;}}
+          return <button key={i} onClick={()=>picked===null&&setPicked(i)} style={{textAlign:"left",padding:"10px 14px",borderRadius:8,border:`1px solid ${bd}`,background:bg,color:col,cursor:picked===null?"pointer":"default",fontFamily:FB,fontSize:15,lineHeight:1.45}}><span style={{color:BURNT,fontWeight:700,marginRight:8}}>{letters[i]}</span>{opt}</button>;
+        })}
+      </div>
+      {picked!==null&&<div style={{marginTop:14,padding:"12px 14px",borderRadius:8,background:"rgba(26,107,60,0.12)",borderLeft:`3px solid ${picked===quiz.correct?"#1a6b3c":BURNT}`}}>
+        <div style={{fontWeight:700,color:picked===quiz.correct?"#5fbf85":BURNT,marginBottom:6}}>{picked===quiz.correct?"✓ Correct":"✗ Not quite"}</div>
+        <div style={{color:"#d8ccb5",fontSize:14,lineHeight:1.6}}>{renderInline(quiz.explanation)}</div>
+      </div>}
+    </div>);
+}
+
+function VideoEmbed({video}){
+  if(!video||video.id==="PENDING_VERIFY"||!video.id) return null;
+  return(
+    <div style={{margin:"0 0 20px",borderRadius:10,overflow:"hidden",border:`1px solid ${BORDER}`}}>
+      <div style={{position:"relative",paddingBottom:"56.25%",height:0}}>
+        <iframe title={video.title} src={`https://www.youtube-nocookie.com/embed/${video.id}?rel=0&modestbranding=1`} style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",border:0}} allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowFullScreen/>
+      </div>
+      <div style={{padding:"8px 12px",background:PANEL,color:MUTED,fontSize:12}}>{video.title}</div>
+    </div>);
+}
+
+function ResourceBlock({resource:r}){
+  if(!r) return null;
+  if(r.type==="reference"){
+    return(
+      <div style={{margin:"0 0 22px",borderRadius:10,border:`1px solid ${BORDER}`,background:"rgba(0,0,0,0.18)",overflow:"hidden"}}>
+        <div style={{padding:"10px 16px",background:PANEL,fontFamily:FD,letterSpacing:"0.06em",fontSize:16,color:"#e8a87c",borderBottom:`1px solid ${BORDER}`}}>📎 REFERENCE &amp; FURTHER READING</div>
+        <div style={{padding:"14px 16px"}}>
+          <ul style={{margin:"0 0 12px",paddingLeft:20}}>
+            {r.items.map((it,i)=>(<li key={i} style={{margin:"0 0 8px",lineHeight:1.5}}><a href={it.url} target="_blank" rel="noopener noreferrer" style={{color:"#e8a87c",textDecoration:"underline",fontWeight:600}}>{it.label}</a></li>))}
+          </ul>
+          <p style={{margin:0,lineHeight:1.65,color:"#d8ccb5",fontSize:14.5}}>{renderInline(r.expansion)}</p>
+        </div>
+      </div>);
+  }
+  if(r.type==="diagram"){
+    return(
+      <div style={{margin:"0 0 22px",borderRadius:10,border:`1px solid ${BORDER}`,background:"rgba(0,0,0,0.18)",overflow:"hidden"}}>
+        <div style={{padding:"10px 16px",background:PANEL,fontFamily:FD,letterSpacing:"0.05em",fontSize:18,color:"#e8a87c",borderBottom:`1px solid ${BORDER}`}}>{r.title}</div>
+        <div style={{padding:"16px"}}>
+          {r.caption&&<p style={{margin:"0 0 16px",lineHeight:1.6,color:"#d8ccb5",fontSize:14,fontStyle:"italic"}}>{r.caption}</p>}
+          <div style={{display:"flex",flexDirection:"column",gap:0}}>
+            {r.stages.map((s,i)=>(
+              <div key={i}>
+                <div style={{display:"flex",alignItems:"stretch",borderRadius:8,overflow:"hidden",border:`1px solid ${BORDER}`}}>
+                  <div style={{width:6,background:s.color,flexShrink:0}}/>
+                  <div style={{padding:"10px 14px",background:"rgba(245,240,232,0.04)",flex:1}}>
+                    <div style={{fontFamily:FD,fontSize:18,letterSpacing:"0.03em",color:CREAM}}>{s.label}</div>
+                    <div style={{color:"#d8ccb5",fontSize:13.5,lineHeight:1.5,marginTop:3}}>{s.detail}</div>
+                  </div>
+                </div>
+                {i<r.stages.length-1&&<div style={{textAlign:"center",color:MUTED,fontSize:18,lineHeight:1,padding:"4px 0"}}>↓</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>);
+  }
+  if(r.type==="summary"){
+    return(
+      <div style={{margin:"0 0 22px",padding:"16px 18px",borderRadius:10,border:`1px solid ${BORDER}`,borderLeft:`4px solid ${BURNT}`,background:"rgba(200,75,17,0.08)"}}>
+        <div style={{fontFamily:FD,fontSize:15,letterSpacing:"0.06em",color:"#e8a87c",marginBottom:8}}>IN SUMMARY</div>
+        <p style={{margin:0,lineHeight:1.65,color:"#e8ddc9",fontSize:15}}>{renderInline(r.text)}</p>
+      </div>);
+  }
+  return null;
+}
+
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function FinalExam({onResult}){
+  const [answers,setAnswers]=useState({});
+  const [submitted,setSubmitted]=useState(false);
+  const questions=useMemo(()=>shuffle(CUI_FINAL_EXAM).map(q=>{
+    const opts=q.options.map((text,origIdx)=>({text,origIdx}));
+    const so=shuffle(opts);
+    return {...q,displayOptions:so.map(o=>o.text),displayCorrect:so.findIndex(o=>o.origIdx===q.correct)};
+  }),[]);
+  const score=questions.reduce((a,q,i)=>a+(answers[i]===q.displayCorrect?1:0),0);
+  const pct=Math.round(score/questions.length*100);
+  const passed=score>=PASS_SCORE;
+  const letters=["A","B","C","D"];
+  function submit(){ setSubmitted(true); if(onResult) onResult(score, passed); }
+  return(
+    <div>
+      <p style={{color:MUTED,marginBottom:20,lineHeight:1.6}}>{questions.length} questions from all four phases, random order, shuffled answers. Pass mark: <strong style={{color:CREAM}}>85% ({PASS_SCORE}/{questions.length})</strong> to earn the certificate.</p>
+      {questions.map((q,i)=>(
+        <div key={i} style={{border:`1px solid ${BORDER}`,borderRadius:10,padding:"16px 18px",margin:"0 0 14px",background:"rgba(0,0,0,0.18)"}}>
+          <div style={{fontWeight:700,color:CREAM,marginBottom:12,lineHeight:1.5}}><span style={{color:BURNT,fontFamily:FD,marginRight:8,fontSize:17}}>{i+1}.</span><span style={{color:MUTED,fontSize:12,marginRight:8}}>[P{q.phase}]</span>{q.question}</div>
+          <div style={{display:"flex",flexDirection:"column",gap:7}}>
+            {q.displayOptions.map((opt,oi)=>{
+              const isPicked=answers[i]===oi,isCorrect=oi===q.displayCorrect;
+              let bg="rgba(245,240,232,0.04)",bd=BORDER,col="#e8ddc9";
+              if(submitted){if(isCorrect){bg="rgba(26,107,60,0.25)";bd="#1a6b3c";col=CREAM;}else if(isPicked){bg="rgba(200,75,17,0.18)";bd=BURNT;col=CREAM;}}else if(isPicked){bg="rgba(200,75,17,0.12)";bd=BURNT;}
+              return <button key={oi} onClick={()=>!submitted&&setAnswers(a=>({...a,[i]:oi}))} style={{textAlign:"left",padding:"9px 13px",borderRadius:7,border:`1px solid ${bd}`,background:bg,color:col,cursor:submitted?"default":"pointer",fontFamily:FB,fontSize:14.5,lineHeight:1.45}}><span style={{color:BURNT,fontWeight:700,marginRight:8}}>{letters[oi]}</span>{opt}</button>;
+            })}
+          </div>
+          {submitted&&<div style={{marginTop:10,fontSize:13.5,color:"#d8ccb5",lineHeight:1.55,borderLeft:`3px solid ${answers[i]===q.displayCorrect?"#1a6b3c":BURNT}`,paddingLeft:12}}>{renderInline(q.explanation)}</div>}
+        </div>))}
+      {!submitted
+        ?<button onClick={submit} style={{marginTop:8,padding:"12px 28px",borderRadius:8,border:"none",background:BURNT,color:CREAM,fontFamily:FD,fontSize:20,letterSpacing:"0.05em",cursor:"pointer",textTransform:"uppercase"}}>Submit Exam</button>
+        :<div style={{marginTop:12,padding:"18px 22px",borderRadius:10,background:PANEL,border:`1px solid ${passed?"#1a6b3c":BURNT}`}}>
+          <div style={{fontFamily:FD,fontSize:32,color:passed?"#5fbf85":BURNT,letterSpacing:"0.03em"}}>{score} / {questions.length} &middot; {pct}%</div>
+          <div style={{color:MUTED,marginTop:4}}>{passed?"Pass — your certificate is now unlocked. See the Certificate tab.":`Below the 85% pass mark (${PASS_SCORE}/${questions.length}). Review and retry.`}</div>
+          <button onClick={()=>{setAnswers({});setSubmitted(false);}} style={{marginTop:14,padding:"9px 20px",borderRadius:7,border:`1px solid ${BORDER}`,background:"transparent",color:CREAM,cursor:"pointer",fontFamily:FB}}>Retake</button>
+        </div>}
+    </div>);
+}
+
+// Simple deterministic verification ID from name + date
+function certId(name,dateStr){
+  const s=(name||"ANON")+"|"+dateStr+"|CUI";
+  let h=0; for(let i=0;i<s.length;i++){ h=((h<<5)-h+s.charCodeAt(i))|0; }
+  const hex=(h>>>0).toString(16).toUpperCase().padStart(8,"0");
+  return "CXE-CUI-"+hex.slice(0,4)+"-"+hex.slice(4,8);
+}
+
+function Certificate({passed,score}){
+  const [name,setName]=useState(()=>lsGet("cui-cert-name",""));
+  const dateStr=useMemo(()=>new Date().toLocaleDateString(undefined,{year:"numeric",month:"long",day:"numeric"}),[]);
+  function updateName(v){ setName(v); lsSet("cui-cert-name",v); }
+  if(!passed){
+    return(
+      <div style={{padding:"28px 24px",borderRadius:12,border:`1px dashed ${BORDER}`,background:"rgba(0,0,0,0.18)",textAlign:"center"}}>
+        <div style={{fontSize:40,marginBottom:10}}>🔒</div>
+        <div style={{fontFamily:FD,fontSize:26,color:CREAM,letterSpacing:"0.03em"}}>Certificate Locked</div>
+        <p style={{color:MUTED,marginTop:8,lineHeight:1.6,maxWidth:460,margin:"8px auto 0"}}>Pass the Final Exam at <strong style={{color:CREAM}}>85% ({PASS_SCORE}/{EXAM_TOTAL})</strong> or higher to unlock your certificate of completion.</p>
+      </div>);
+  }
+  const id=certId(name,dateStr);
+  return(
+    <div>
+      <div style={{marginBottom:16,display:"flex",gap:10,alignItems:"center",flexWrap:"wrap"}}>
+        <label style={{color:MUTED,fontSize:14}}>Name on certificate:</label>
+        <input value={name} onChange={e=>updateName(e.target.value)} placeholder="Your name" style={{padding:"8px 12px",borderRadius:7,border:`1px solid ${BORDER}`,background:PANEL,color:CREAM,fontFamily:FB,fontSize:15,minWidth:200}}/>
+        <button onClick={()=>window.print()} style={{padding:"8px 16px",borderRadius:7,border:`1px solid ${BORDER}`,background:"transparent",color:CREAM,cursor:"pointer",fontFamily:FB}}>🖨 Print / Save PDF</button>
+      </div>
+      <div style={{border:`2px solid ${BURNT}`,borderRadius:14,padding:"36px 32px",background:"linear-gradient(160deg, #241a10 0%, #1a1208 100%)",textAlign:"center",position:"relative"}}>
+        <div style={{fontFamily:FD,fontSize:14,letterSpacing:"0.28em",color:"#e8a87c"}}>CORTEXEDGE E-LEARNING</div>
+        <div style={{fontFamily:FD,fontSize:40,letterSpacing:"0.04em",color:CREAM,margin:"14px 0 4px"}}>Certificate of Completion</div>
+        <div style={{width:80,height:3,background:BURNT,margin:"10px auto 22px"}}/>
+        <div style={{color:MUTED,fontSize:15}}>This certifies that</div>
+        <div style={{fontFamily:FD,fontSize:34,color:CREAM,letterSpacing:"0.02em",margin:"8px 0",minHeight:40}}>{name||"—"}</div>
+        <div style={{color:MUTED,fontSize:15,lineHeight:1.6,maxWidth:520,margin:"0 auto"}}>has completed the information-awareness course</div>
+        <div style={{fontFamily:FD,fontSize:26,color:"#e8a87c",letterSpacing:"0.02em",margin:"8px 0 4px"}}>Controlled Unclassified Information</div>
+        <div style={{color:MUTED,fontSize:14}}>Handling, Transmission &amp; Rules · 15 Lessons</div>
+        <div style={{display:"flex",justifyContent:"center",gap:36,margin:"24px 0 8px",flexWrap:"wrap"}}>
+          <div><div style={{fontFamily:FD,fontSize:24,color:CREAM}}>{score}/{EXAM_TOTAL}</div><div style={{color:MUTED,fontSize:12,letterSpacing:"0.05em"}}>EXAM SCORE</div></div>
+          <div><div style={{fontFamily:FD,fontSize:24,color:CREAM}}>{Math.round(score/EXAM_TOTAL*100)}%</div><div style={{color:MUTED,fontSize:12,letterSpacing:"0.05em"}}>RESULT</div></div>
+          <div><div style={{fontFamily:FD,fontSize:24,color:CREAM}}>{dateStr}</div><div style={{color:MUTED,fontSize:12,letterSpacing:"0.05em"}}>DATE</div></div>
+        </div>
+        <div style={{color:MUTED,fontSize:12,letterSpacing:"0.08em",marginTop:6}}>VERIFICATION ID · {id}</div>
+        {/* DISCLAIMER */}
+        <div style={{marginTop:26,padding:"14px 16px",borderRadius:8,background:"rgba(200,75,17,0.10)",border:`1px solid ${BORDER}`,textAlign:"left"}}>
+          <div style={{fontFamily:FD,fontSize:14,letterSpacing:"0.06em",color:"#e8a87c",marginBottom:6}}>⚠ IMPORTANT — PLEASE READ</div>
+          <p style={{margin:0,color:"#d8ccb5",fontSize:12.5,lineHeight:1.6}}>
+            This certificate reflects completion of an <strong style={{color:CREAM}}>information-awareness course for reference purposes only</strong>. CortexEdge is <strong style={{color:CREAM}}>not a legal, regulatory, or compliance authority</strong>, and this course does not constitute legal or compliance advice, nor an official CUI, CMMC, or government certification. It does not by itself satisfy any contractual, DFARS, CMMC, or training mandate. Always verify CUI handling requirements against current regulations and your organization's security and compliance office. Content reflects the regulatory landscape as of early 2026 and is subject to change.
+          </p>
+        </div>
+      </div>
+    </div>);
+}
+
+function CUITrackApp(){
+  const [active,setActive]=useState(0); // 0..14 lessons, 15 = exam, 16 = certificate
+  const [menuOpen,setMenuOpen]=useState(false);
+  const [examScore,setExamScore]=useState(()=>parseInt(lsGet("cui-exam-score","-1"),10));
+  const [passed,setPassed]=useState(()=>lsGet("cui-passed","0")==="1");
+  const isExam=active===15, isCert=active===16;
+  const lesson=(!isExam&&!isCert)?CUI_LESSONS[active]:null;
+  const phaseGroups=useMemo(()=>{const g={};CUI_LESSONS.forEach((l,i)=>{(g[l.phase]=g[l.phase]||[]).push({...l,_idx:i});});return g;},[]);
+  const go=(i)=>{setActive(i);setMenuOpen(false);window.scrollTo&&window.scrollTo(0,0);};
+  function handleResult(score,didPass){
+    setExamScore(score); lsSet("cui-exam-score",String(score));
+    if(didPass){ setPassed(true); lsSet("cui-passed","1"); }
+  }
+  return(
+    <div style={{display:"flex",minHeight:"100vh",background:DARK,color:CREAM,fontFamily:FB}}>
+      <nav style={{width:280,minWidth:280,background:PANEL,borderRight:`1px solid ${BORDER}`,overflowY:"auto",maxHeight:"100vh",position:"sticky",top:0,padding:"22px 0",display:menuOpen?"block":"none"}} className="cui-sidebar">
+        <div style={{padding:"0 20px 14px"}}>
+          <a href="../" style={{color:"#e8a87c",textDecoration:"none",fontSize:13,fontFamily:FB,display:"inline-block",marginBottom:14}}>← All Courses</a>
+          <div style={{fontFamily:FD,fontSize:12,letterSpacing:"0.18em",color:BURNT}}>CORTEXEDGE · CUI TRACK</div>
+          <div style={{fontFamily:FD,fontSize:24,lineHeight:1.05,marginTop:6}}>Controlled Unclassified Information</div>
+          <div style={{color:MUTED,fontSize:12,marginTop:6,lineHeight:1.5}}>15 lessons + exam + certificate</div>
+        </div>
+        {Object.entries(phaseGroups).map(([phase,items])=>(
+          <div key={phase} style={{marginBottom:6}}>
+            <div style={{padding:"10px 20px 6px",fontFamily:FD,fontSize:14,letterSpacing:"0.08em",color:items[0].phaseColor,textTransform:"uppercase"}}>{phase}</div>
+            {items.map(l=><button key={l._idx} onClick={()=>go(l._idx)} style={{display:"block",width:"100%",textAlign:"left",padding:"9px 20px",border:"none",borderLeft:`3px solid ${active===l._idx?BURNT:"transparent"}`,background:active===l._idx?"rgba(200,75,17,0.12)":"transparent",color:active===l._idx?CREAM:"#cdbfa6",cursor:"pointer",fontFamily:FB,fontSize:14,lineHeight:1.4}}><span style={{color:MUTED,fontSize:12,marginRight:7}}>L{String(l._idx+1).padStart(2,"0")}</span>{l.title}</button>)}
+          </div>))}
+        <button onClick={()=>go(15)} style={{display:"block",width:"100%",textAlign:"left",padding:"12px 20px",marginTop:12,border:"none",borderLeft:`3px solid ${isExam?BURNT:"transparent"}`,background:isExam?"rgba(200,75,17,0.12)":"transparent",color:isExam?CREAM:"#cdbfa6",cursor:"pointer",fontFamily:FD,fontSize:18,letterSpacing:"0.05em",textTransform:"uppercase"}}>★ Final Exam</button>
+        <button onClick={()=>go(16)} style={{display:"block",width:"100%",textAlign:"left",padding:"12px 20px",border:"none",borderLeft:`3px solid ${isCert?BURNT:"transparent"}`,background:isCert?"rgba(200,75,17,0.12)":"transparent",color:isCert?CREAM:"#cdbfa6",cursor:"pointer",fontFamily:FD,fontSize:18,letterSpacing:"0.05em",textTransform:"uppercase"}}>{passed?"🎓":"🔒"} Certificate</button>
+      </nav>
+
+      <main style={{flex:1,overflowY:"auto",maxHeight:"100vh",padding:"20px 22px 80px"}}>
+        <button onClick={()=>setMenuOpen(o=>!o)} style={{marginBottom:18,padding:"9px 16px",borderRadius:7,border:`1px solid ${BORDER}`,background:PANEL,color:CREAM,cursor:"pointer",fontFamily:FD,fontSize:16,letterSpacing:"0.05em"}}>{menuOpen?"✕ Close":"☰ Menu"}</button>
+        {isCert?(
+          <>
+            <div style={{fontFamily:FD,fontSize:13,letterSpacing:"0.18em",color:BURNT}}>ACHIEVEMENT</div>
+            <h1 style={{fontFamily:FD,fontSize:40,lineHeight:1.02,margin:"6px 0 24px"}}>Certificate</h1>
+            <Certificate passed={passed} score={examScore<0?0:examScore}/>
+          </>
+        ):isExam?(
+          <>
+            <div style={{fontFamily:FD,fontSize:13,letterSpacing:"0.18em",color:BURNT}}>ASSESSMENT</div>
+            <h1 style={{fontFamily:FD,fontSize:40,lineHeight:1.02,margin:"6px 0 24px"}}>Final Exam</h1>
+            <FinalExam onResult={handleResult}/>
+          </>
+        ):(
+          <>
+            <div style={{fontFamily:FD,fontSize:13,letterSpacing:"0.16em",color:lesson.phaseColor}}>{lesson.phase} · {lesson.type} · {lesson.time}</div>
+            <h1 style={{fontFamily:FD,fontSize:36,lineHeight:1.04,margin:"6px 0 8px"}}>{lesson.title}</h1>
+            <p style={{color:MUTED,fontSize:16,lineHeight:1.5,margin:"0 0 24px",fontStyle:"italic"}}>{lesson.subtitle}</p>
+            {lesson.resource ? <ResourceBlock resource={lesson.resource}/> : <VideoEmbed video={lesson.video}/>}
+            <div style={{marginBottom:32}}>{lesson.content.map((b,i)=><ContentBlock key={i} block={b}/>)}</div>
+            <h2 style={{fontFamily:FD,fontSize:26,color:BURNT,letterSpacing:"0.04em",margin:"0 0 18px",textTransform:"uppercase",borderTop:`1px solid ${BORDER}`,paddingTop:26}}>Knowledge Check</h2>
+            {lesson.quizzes.map((q,i)=><Quiz key={i} quiz={q} idx={i}/>)}
+            <div style={{display:"flex",justifyContent:"space-between",marginTop:32,gap:12}}>
+              <button disabled={active===0} onClick={()=>go(Math.max(0,active-1))} style={{padding:"10px 18px",borderRadius:7,border:`1px solid ${BORDER}`,background:"transparent",color:active===0?MUTED:CREAM,cursor:active===0?"default":"pointer",fontFamily:FB,opacity:active===0?0.4:1}}>← Prev</button>
+              <button onClick={()=>go(Math.min(15,active+1))} style={{padding:"10px 18px",borderRadius:7,border:"none",background:BURNT,color:CREAM,cursor:"pointer",fontFamily:FD,fontSize:16,letterSpacing:"0.04em",textTransform:"uppercase"}}>{active===14?"Final Exam →":"Next →"}</button>
+            </div>
+          </>
+        )}
+        <div style={{marginTop:44,padding:"14px 18px",borderRadius:8,background:"rgba(0,0,0,0.25)",border:`1px solid ${BORDER}`,color:MUTED,fontSize:12.5,lineHeight:1.6}}>
+          <strong style={{color:"#d8ccb5"}}>Training only — not legal or compliance advice.</strong> This is an information-awareness course for reference. CortexEdge is not a legal, regulatory, or compliance authority. Verify all specifics against current regulations, your contracts, and your security/compliance office. Content reflects early 2026 and requires SME review before operational reliance.
+        </div>
+      </main>
+    </div>);
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<CUITrackApp />);
+
+  </script>
+</body>
+</html>
