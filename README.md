@@ -20,12 +20,12 @@ be reviewed by a subject-matter expert before operational reliance.
 
 - `index.html` — the full app (React 18 + Babel via CDN, course data inlined)
 - `manifest.json` — PWA manifest (scoped to `/cui/`)
-- `sw.js` — service worker (network-first for HTML, cache-first for static/CDN). Cache: `cortexedge-cui-v1`
+- `sw.js` — service worker (network-first for HTML, cache-first for static/CDN). Cache: `cortexedge-cui-v2`
 - `icons/` — app icons
 
 ## Features
 
-- 15 lessons (10 with verified videos, 4 with reference-document cards, 1 capstone with a CUI-lifecycle infographic)
+- 15 lessons: 10 with verified videos, 14 with official .gov reference cards (34 authoritative links — NARA/ISOO, dodcui.mil, DoDI 5200.48, NIST, eCFR, CDSE, DCSA, FedRAMP, SPRS, DIBNet), and a capstone CUI-lifecycle infographic
 - Per-lesson knowledge-check quizzes with explanations
 - 53-question final exam (shuffled questions + answers), **85% to pass (46/53)**
 - Certificate of completion (unlocks on passing; carries the awareness/disclaimer statement), printable to PDF

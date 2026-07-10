@@ -46,6 +46,11 @@ const CUI_LESSONS =
     subtitle: "Executive Order 13556, the problem CUI solved, NARA as the governing authority, and who is in scope. The legal-but-practical ground rules for this track.",
     time: "30 min", type: "Foundations",
     video: { id: "iHZBRxjJW4c", title: "CUI Overview in Under 5 Minutes (Cleared Systems)" },
+    resource: { type: "reference", items: [
+      { label: "DoD CUI Program — official home (dodcui.mil)", url: "https://www.dodcui.mil/" },
+      { label: "Executive Order 13556 & CUI guidance hub (NARA/ISOO)", url: "https://www.archives.gov/guidance/cui-guidance" },
+      { label: "DoDI 5200.48 — DoD CUI instruction (PDF)", url: "https://www.dodcui.mil/Portals/109/Documents/Policy%20Docs/DoDI%205200.48%20CUI.pdf" }
+    ], expansion: "The two anchor documents for everything in this track: **32 CFR Part 2002** (the government-wide CUI rule, administered by NARA/ISOO as Executive Agent) and **DoDI 5200.48** (how DoD implements it — the instruction that retired FOUO and established the DoD CUI Registry). If you handle CUI under DoD contracts, DoDI 5200.48 is the primary reference your security office works from." },
     content: [
       { type: "p", text: "**Important framing before we begin.** This track is educational training, not legal or compliance advice. CUI rules carry real legal and contractual consequences, and the regulatory landscape is actively changing. Nothing here substitutes for your contract terms, your organization's security office, or a qualified compliance professional. Treat this as a map of the territory — then verify the specifics against authoritative sources and your own program before you act." },
 
@@ -131,6 +136,10 @@ const CUI_LESSONS =
     subtitle: "How CUI is organized. CUI Basic vs. CUI Specified, reading the NARA registry, and the categories most relevant to aerospace work.",
     time: "35 min", type: "Foundations",
     video: { id: "Rz-g8Q4_WU8", title: "Real Examples of CUI: CAD Files, Specs & Drawings (Secure-Centric)" },
+    resource: { type: "reference", items: [
+      { label: "NARA CUI Registry — government-wide category list", url: "https://www.archives.gov/cui/registry/category-list" },
+      { label: "DoD CUI Registry — categories & abbreviations", url: "https://www.dodcui.mil/CUI-Categories-and-Abbreviations/" }
+    ], expansion: "Two registries matter: the **NARA registry** defines the government-wide categories; the **DoD registry** refines them for defense contracts (e.g., CTI — Controlled Technical Information — is the everyday category for engineering data). Only the government designates CUI; contractors identify and protect what's been designated. When a marking cites a category you don't recognize, these registries are where you look it up." },
     content: [
       { type: "p", text: "CUI is not one undifferentiated bucket. It's organized into defined categories, each tied to the law, regulation, or government-wide policy that authorizes its control. Understanding this structure is what lets you answer the two questions that matter for any piece of information: is this CUI, and if so, what rules apply to it?" },
 
@@ -211,6 +220,10 @@ const CUI_LESSONS =
     subtitle: "How CUI relates to and differs from classified information, Federal Contract Information (FCI), ITAR/EAR export-controlled data, and ordinary proprietary information.",
     time: "35 min", type: "Foundations",
     video: { id: "twdT23DUWAw", title: "Controlled Unclassified Information (CUI) — KNOW YOUR DATA! (CastleLock)" },
+    resource: { type: "reference", items: [
+      { label: "32 CFR Part 2002 — what is (and isn't) CUI (eCFR)", url: "https://www.ecfr.gov/current/title-32/part-2002" },
+      { label: "DoD CUI Training resources (dodcui.mil)", url: "https://www.dodcui.mil/Training/" }
+    ], expansion: "The boundary questions — CUI vs. classified, CUI vs. FCI, CUI vs. proprietary — all trace to definitions in **32 CFR 2002**. The DoD training page includes desktop aids that walk the same distinctions with DoD examples, including how legacy FOUO material is handled (existing FOUO documents aren't re-marked wholesale; new documents use CUI markings)." },
     content: [
       { type: "p", text: "The single biggest source of confusion in this area is mixing up CUI with the several adjacent categories of protected information. Each has its own rules, and they overlap in ways that trip people up. This lesson draws the boundaries clearly." },
 
@@ -307,10 +320,11 @@ const CUI_LESSONS =
     time: "35 min", type: "Foundations",
     video: null,
     resource: { type: "reference", items: [
-      { label: "NARA CUI Registry — category list (incl. Export Control)", url: "https://www.archives.gov/cui/registry/category-list" },
+      { label: "NARA CUI Registry — Export Control category", url: "https://www.archives.gov/cui/registry/category-list" },
       { label: "ITAR (22 CFR 120–130) — State Dept. DDTC", url: "https://www.pmddtc.state.gov/" },
-      { label: "EAR (15 CFR 730–774) — Commerce Dept. BIS", url: "https://www.bis.gov/" }
-    ], expansion: "Export-controlled CUI is governed by two regimes at once. The **CUI framework** (32 CFR 2002, NIST 800-171) controls how the data is marked and safeguarded; **export-control law** (ITAR for defense articles on the U.S. Munitions List, EAR for dual-use items on the Commerce Control List) controls *who* may access it and *where* it may go. The registry's Export Control category is the CUI side; the DDTC (ITAR) and BIS (EAR) resources are the export side. Remember the deemed-export rule: releasing controlled technical data to a foreign person — even inside the U.S. — is treated as an export, and need-to-know never overrides authorized-person status. When both apply, you must satisfy both; verify any specific access question with your export-control officer." },
+      { label: "EAR (15 CFR 730–774) — Commerce Dept. BIS", url: "https://www.bis.gov/" },
+      { label: "DoDI 5200.48 §3 — CUI + foreign disclosure interplay (PDF)", url: "https://www.dodcui.mil/Portals/109/Documents/Policy%20Docs/DoDI%205200.48%20CUI.pdf" }
+    ], expansion: "Export-controlled CUI is governed by two regimes at once. The **CUI framework** (32 CFR 2002, NIST 800-171) controls how the data is marked and safeguarded; **export-control law** (ITAR for defense articles on the U.S. Munitions List, EAR for dual-use items on the Commerce Control List) controls *who* may access it and *where* it may go. Remember the deemed-export rule: releasing controlled technical data to a foreign person — even inside the U.S. — is treated as an export, and need-to-know never overrides authorized-person status. When both regimes apply, you must satisfy both; verify any specific access question with your export-control officer." },
     content: [
       { type: "p", text: "The previous lesson established that some CUI is also export-controlled, and that when it is, two regimes apply simultaneously. This lesson goes deep on that intersection — because for aerospace and defense work it's the single highest-stakes handling scenario, and the place where a well-intentioned engineer can commit a serious violation without ever 'leaking' anything in the conventional sense." },
 
@@ -405,6 +419,10 @@ const CUI_LESSONS =
     subtitle: "What a compliant CUI marking looks like: the banner, category markings, the designation indicator, and limited-dissemination controls.",
     time: "35 min", type: "Marking & Handling",
     video: { id: "UxpF21AsxZE", title: "Controlled Unclassified Information — Introduction to Marking (US National Archives)" },
+    resource: { type: "reference", items: [
+      { label: "NARA CUI Marking Handbook (official PDF)", url: "https://www.archives.gov/files/cui/20161206-cui-marking-handbook-v1-1.pdf" },
+      { label: "DoD CUI marking desktop aid (2024, PDF)", url: "https://www.dodcui.mil/Portals/109/Documents/Desktop%20Aid%20Docs/Cleared%20CUI%20Awareness%20and%20Marking%20Training%202024.pdf" }
+    ], expansion: "The **NARA Marking Handbook** is the canonical how-to: banner construction, category markings, limited-dissemination controls, portion marking, and the designation indicator. The DoD desktop aid adds DoD-specific practice — notably that DoD applies the required controls of Specified categories while using the simple 'CUI' banner (no SP- prefix in the banner during current implementation). When your customer's marking guidance and these documents differ, the contract governs — ask your security office." },
     content: [
       { type: "p", text: "Marking is how CUI announces itself. A correct marking tells every subsequent handler exactly what they're holding and how to treat it. Incorrect or missing markings are among the most common compliance failures — and because markings drive handling, a marking error cascades into handling errors. This lesson covers what a compliant marking looks like." },
 
@@ -481,6 +499,10 @@ const CUI_LESSONS =
     subtitle: "How handling rules differ between the two types, where to find the controls for a given category, and how CUI gets decontrolled.",
     time: "35 min", type: "Marking & Handling",
     video: { id: "yfzi-WzrEOc", title: "CUI Masterclass with Ryan Bonner (GRC Academy) — safeguarding & handling" },
+    resource: { type: "reference", items: [
+      { label: "CUI Basic vs. Specified — registry definitions (NARA)", url: "https://www.archives.gov/cui/registry/category-list" },
+      { label: "CDSE IF141.16 — DoD Mandatory CUI Training (free)", url: "https://www.cdse.edu/Training/eLearning/IF141/" }
+    ], expansion: "**CUI Basic** follows the uniform baseline in 32 CFR 2002; **CUI Specified** categories carry additional handling requirements written into their underlying law or regulation — the registry entry for each category tells you which. The CDSE IF141.16 course is the DoD-mandated baseline training and is free and public; a completion certificate from it is often accepted evidence of CUI awareness training under DoD contracts." },
     content: [
       { type: "p", text: "Lesson 2 introduced the Basic vs. Specified distinction at the category level. This lesson is about what it means for your actual handling — what you do differently depending on which type you're holding, and how CUI eventually stops being CUI." },
 
@@ -567,6 +589,10 @@ const CUI_LESSONS =
     subtitle: "Need-to-know access, physical safeguarding, clean-desk discipline, and the destruction and disposal requirements for CUI.",
     time: "30 min", type: "Marking & Handling",
     video: { id: "xQNTG0-snlI", title: "CUI Handling, Storage, Transmission, Disposal & Vendor Management (ICS Data)" },
+    resource: { type: "reference", items: [
+      { label: "DCSA CUI Training Reference Guide for Industry (PDF)", url: "https://www.dcsa.mil/Portals/91/Documents/CTP/CUI/CUI_Training_Reference_Guide_012722.pdf" },
+      { label: "32 CFR 2002.16 — physical safeguarding standards (eCFR)", url: "https://www.ecfr.gov/current/title-32/part-2002" }
+    ], expansion: "The DCSA industry guide consolidates physical-handling practice for contractors: controlled environments, cover sheets, storage, and — worth committing to memory — **destruction to NIST 800-88 standard (cross-cut to 1mm × 5mm particles for paper)**. 'Out of sight of unauthorized persons, secured when unattended' is the operating principle; the guide translates it into concrete office behaviors." },
     content: [
       { type: "p", text: "Much of modern CUI lives in digital systems (Phase 3 covers those), but plenty still exists physically — printed drawings, marked documents, notes, removable media. And the human behaviors around physical handling are where a lot of real-world leaks happen. This lesson covers the physical side." },
 
@@ -645,6 +671,10 @@ const CUI_LESSONS =
     subtitle: "Real-world failure patterns — mismarking, commingling, oversharing, improper email — framed as cautionary cases to recognize and avoid.",
     time: "30 min", type: "Marking & Handling",
     video: { id: "jvYgzfxuQEI", title: "CUI Management Mishaps: Avoid These Blunders! (On Call Compliance)" },
+    resource: { type: "reference", items: [
+      { label: "DoD CUI Training page — desktop aids & quick references", url: "https://www.dodcui.mil/Training/" },
+      { label: "CDSE CUI toolkit", url: "https://www.cdse.edu/Training/Toolkits/" }
+    ], expansion: "Most CUI mistakes are routine-workflow mistakes: unmarked working papers, personal email, unauthorized cloud shares, over-broad distribution lists, and screens/printouts left exposed. The DoD desktop aids are designed as at-the-desk reminders for exactly these moments. A useful habit: before any send, share, or print of technical data, run the three questions — *Is it CUI? Is this channel authorized? Does every recipient have need-to-know (and authorization, if export-controlled)?*" },
     content: [
       { type: "p", text: "Knowing the rules and applying them reliably are different skills. This lesson is a catalogue of the failure patterns that actually cause CUI incidents — recognizing them is half the battle, because most happen through inattention rather than ignorance." },
 
@@ -720,9 +750,10 @@ const CUI_LESSONS =
     time: "35 min", type: "Transmission & Systems",
     video: null,
     resource: { type: "reference", items: [
-      { label: "NIST SP 800-171 Rev 2 — System & Communications Protection family", url: "https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final" },
-      { label: "32 CFR Part 2002 — CUI safeguarding (eCFR)", url: "https://www.ecfr.gov/current/title-32/part-2002" }
-    ], expansion: "The transmission rules trace directly to the **System and Communications Protection** family in NIST SP 800-171 Rev 2, which requires cryptographic protection of CUI confidentiality in transit — in practice, FIPS-validated encryption. 32 CFR Part 2002 establishes the broader safeguarding baseline. The practical takeaways from the lesson map onto these sources: encrypt CUI in transit, use only authorized channels and accounts (never personal email), scrutinize every recipient, and watch attachments and expanding email threads. When a channel or method isn't clearly authorized, confirm with your security office before sending." },
+      { label: "NIST SP 800-171 Rev 2 — System & Communications Protection", url: "https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final" },
+      { label: "32 CFR Part 2002 — CUI safeguarding (eCFR)", url: "https://www.ecfr.gov/current/title-32/part-2002" },
+      { label: "DoDI 5200.48 §5 — transmission & email requirements (PDF)", url: "https://www.dodcui.mil/Portals/109/Documents/Policy%20Docs/DoDI%205200.48%20CUI.pdf" }
+    ], expansion: "The transmission rules trace to the **System and Communications Protection** family in NIST SP 800-171 Rev 2 — cryptographic protection of CUI confidentiality in transit, in practice FIPS-validated encryption. DoDI 5200.48 adds the explicit prohibition on personal (.com/.net) email accounts and non-DoD systems for CUI except where approved. Practical rules: encrypt in transit, authorized channels and accounts only, verify every recipient, and watch attachments and growing email threads. If a channel isn't clearly authorized, confirm before sending." },
     content: [
       { type: "p", text: "Transmission is where CUI is most exposed — the moment it leaves your controlled environment and travels to another. It's also where the most frequent incidents occur, because transmitting is so frictionless (one click to send an email). This lesson covers the rules for moving CUI safely." },
 
@@ -806,6 +837,10 @@ const CUI_LESSONS =
     subtitle: "Protecting CUI in non-federal systems: the role of NIST SP 800-171, its control families, and the Revision 2 vs. Revision 3 reality.",
     time: "40 min", type: "Transmission & Systems",
     video: { id: "QjATSFebmyA", title: "Marking CUI in Your I.T. Environment (Summit 7 / CS2 San Diego)" },
+    resource: { type: "reference", items: [
+      { label: "NIST SP 800-171 Rev 2 (full publication)", url: "https://csrc.nist.gov/pubs/sp/800/171/r2/upd1/final" },
+      { label: "SPRS — Supplier Performance Risk System (score reporting)", url: "https://www.sprs.csd.disa.mil/" }
+    ], expansion: "**NIST 800-171 Rev 2** — 110 requirements across 14 families — is the enforced standard for protecting CUI on contractor systems (Rev 3 exists but is not yet contractually required; DoD keeps Rev 2 via class deviation). Contractors self-assess against it and report scores in **SPRS**, which contracting officers check. The system boundary matters as much as the controls: knowing exactly which systems store, process, or transmit CUI defines what must comply." },
     content: [
       { type: "p", text: "Most CUI today lives on computers and networks — and when those are non-federal systems (a contractor's own IT), there's a specific standard that defines how to protect it: NIST Special Publication 800-171. This lesson explains what it is and the version situation you need to understand, without turning into a control-by-control checklist (that's a compliance specialist's job, not this track's)." },
 
@@ -877,9 +912,10 @@ const CUI_LESSONS =
     time: "35 min", type: "Transmission & Systems",
     video: null,
     resource: { type: "reference", items: [
-      { label: "FedRAMP Marketplace — verify a cloud provider's authorization", url: "https://marketplace.fedramp.gov/" },
-      { label: "DFARS 252.204-7012(b)(2)(ii)(D) — cloud provision (eCFR)", url: "https://www.ecfr.gov/current/title-48/chapter-2/subchapter-H/part-252/subpart-252.2/section-252.204-7012" }
-    ], expansion: "DFARS 252.204-7012 states that when a contractor uses an external cloud service provider to store, process, or transmit covered defense information, the provider must meet security requirements equivalent to the **FedRAMP Moderate baseline**. Use the FedRAMP Marketplace to confirm a provider's authorization status before placing CUI in it. Remember the shared-responsibility model: an authorized cloud secures the infrastructure, but you remain responsible for configuration, access, and data handling within it — an authorized cloud is necessary but not sufficient." },
+      { label: "FedRAMP Marketplace — verify provider authorization", url: "https://marketplace.fedramp.gov/" },
+      { label: "DFARS 252.204-7012(b)(2)(ii)(D) — cloud provision (eCFR)", url: "https://www.ecfr.gov/current/title-48/chapter-2/subchapter-H/part-252/subpart-252.2/section-252.204-7012" },
+      { label: "FedRAMP program — official site", url: "https://www.fedramp.gov/" }
+    ], expansion: "DFARS 252.204-7012 requires that an external cloud service provider used to store, process, or transmit covered defense information meet security requirements **equivalent to the FedRAMP Moderate baseline**. Use the Marketplace to confirm a provider's status before placing CUI in it — and remember the shared-responsibility model: an authorized cloud secures the infrastructure, but configuration, access control, and data handling within it remain your responsibility. Authorized cloud is necessary, not sufficient." },
     content: [
       { type: "p", text: "Increasingly, CUI is stored, processed, or transmitted in cloud services rather than on-premises servers. The cloud introduces a specific requirement that's easy to overlook: not every cloud service is authorized to hold CUI, and using the wrong one is a compliance failure even if the service is otherwise excellent." },
 
@@ -954,6 +990,10 @@ const CUI_LESSONS =
     subtitle: "When CUI is compromised: the DFARS 252.204-7012 cyber-incident reporting obligation, the 72-hour expectation, and who you notify.",
     time: "30 min", type: "Transmission & Systems",
     video: { id: "o7e7BiDHLv0", title: "CUI: Unauthorized Disclosure — Prevention and Reporting (US National Archives / ISOO)" },
+    resource: { type: "reference", items: [
+      { label: "DFARS 252.204-7012 — 72-hour cyber incident reporting (eCFR)", url: "https://www.ecfr.gov/current/title-48/chapter-2/subchapter-H/part-252/subpart-252.2/section-252.204-7012" },
+      { label: "DIBNet — DoD cyber incident reporting portal", url: "https://dibnet.dod.mil/" }
+    ], expansion: "Under DFARS 7012, contractors must report cyber incidents affecting covered defense information or covered systems **within 72 hours of discovery**, via **DIBNet** (requires a DoD-approved Medium Assurance Certificate — obtain it *before* you need it, not during an incident). Internally, the employee's job is speed, not investigation: suspected compromise goes to your security office immediately; they run the clock, preservation, and reporting obligations." },
     content: [
       { type: "p", text: "Even with good discipline, incidents happen — a lost laptop, a misdirected email, a network intrusion. What separates a manageable incident from a compliance catastrophe is often the response: reporting it correctly and promptly. This lesson covers the reporting obligation, which is itself a contractual requirement." },
 
@@ -1030,6 +1070,10 @@ const CUI_LESSONS =
     subtitle: "The Cybersecurity Maturity Model Certification: what it is, what Level 2 means for CUI handlers, self-assessment vs. C3PAO, and the phased rollout reality.",
     time: "40 min", type: "Obligations & Landscape",
     video: { id: "ND60r02-_1M", title: "CMMC Scoping Part 2 — CUI Assets & Controlled Unclassified Information (Kieri Solutions)" },
+    resource: { type: "reference", items: [
+      { label: "CMMC Program — official DoD CIO site", url: "https://dodcio.defense.gov/cmmc/" },
+      { label: "32 CFR Part 170 — CMMC Program rule (eCFR)", url: "https://www.ecfr.gov/current/title-32/part-170" }
+    ], expansion: "The DoD CIO CMMC site is the authoritative source for the program: model documentation, scoping guides, and assessment guides for each level. **32 CFR 170** is the program rule itself (effective December 2024), and the phased rollout runs Nov 2025 (Phase 1) through Nov 2028 (Phase 4) — with **Phase 2 (Nov 10, 2026) requiring third-party Level 2 certification** for contractors handling CUI on applicable contracts. If you handle CUI, Level 2 against NIST 800-171 Rev 2 is the bar to plan for." },
     content: [
       { type: "p", text: "CMMC is the framework that puts teeth into CUI protection for the defense industrial base. For years, contractors self-attested to implementing NIST 800-171, with limited verification. CMMC changes that — it adds assessment and certification, making 'we protect CUI' something you increasingly have to prove, not just assert. This lesson explains it in plain terms." },
 
@@ -1122,9 +1166,10 @@ const CUI_LESSONS =
     time: "30 min", type: "Obligations & Landscape",
     video: null,
     resource: { type: "reference", items: [
-      { label: "DFARS 252.204-7012 — flow-down clause, para (m) (eCFR)", url: "https://www.ecfr.gov/current/title-48/chapter-2/subchapter-H/part-252/subpart-252.2/section-252.204-7012" },
-      { label: "32 CFR Part 170 — CMMC Program rule (eCFR)", url: "https://www.ecfr.gov/current/title-32/part-170" }
-    ], expansion: "Flow-down is a contractual mechanism: DFARS 252.204-7012 paragraph (m) requires the prime to include the clause's safeguarding and reporting requirements in subcontracts where a subcontractor will handle covered defense information, and the subcontractor flows it down in turn. CMMC requirements flow down under 32 CFR Part 170 — a subcontractor handling CUI must achieve and maintain its own applicable CMMC status. The CUI carries its protection obligations with it down the supply chain; a sub that cannot demonstrate the required status may be unable to receive CUI and therefore the work. Confirm the specific flow-down terms in your actual contracts with your contracts and security teams." },
+      { label: "DFARS 252.204-7012 para (m) — subcontract flow-down (eCFR)", url: "https://www.ecfr.gov/current/title-48/chapter-2/subchapter-H/part-252/subpart-252.2/section-252.204-7012" },
+      { label: "32 CFR Part 170 — CMMC flow-down requirements (eCFR)", url: "https://www.ecfr.gov/current/title-32/part-170" },
+      { label: "SPRS — where sub scores are visible to primes/COs", url: "https://www.sprs.csd.disa.mil/" }
+    ], expansion: "Flow-down is a contractual mechanism: DFARS 7012 paragraph (m) requires primes to include the clause's safeguarding and reporting requirements in subcontracts where the sub will handle covered defense information, and each tier flows it down in turn. CMMC status flows down under 32 CFR 170 — a sub handling CUI must hold the applicable level itself, and primes verify status before awarding CUI-bearing work. The CUI carries its obligations with it down the supply chain; a sub that can't demonstrate status may be unable to receive the work. Confirm specific terms with your contracts and security teams." },
     content: [
       { type: "p", text: "CUI obligations don't stop at the prime contractor. They flow down the supply chain — and in aerospace, where a program may involve dozens of suppliers and sub-tiers, understanding flow-down is essential. A prime's compliance is only as strong as the weakest sub that touches the CUI." },
 
@@ -1928,7 +1973,8 @@ function CUITrackApp(){
             <div style={{fontFamily:FD,fontSize:13,letterSpacing:"0.16em",color:lesson.phaseColor}}>{lesson.phase} · {lesson.type} · {lesson.time}</div>
             <h1 style={{fontFamily:FD,fontSize:36,lineHeight:1.04,margin:"6px 0 8px"}}>{lesson.title}</h1>
             <p style={{color:MUTED,fontSize:16,lineHeight:1.5,margin:"0 0 24px",fontStyle:"italic"}}>{lesson.subtitle}</p>
-            {lesson.resource ? <ResourceBlock resource={lesson.resource}/> : <VideoEmbed video={lesson.video}/>}
+            <VideoEmbed video={lesson.video}/>
+            <ResourceBlock resource={lesson.resource}/>
             <div style={{marginBottom:32}}>{lesson.content.map((b,i)=><ContentBlock key={i} block={b}/>)}</div>
             <h2 style={{fontFamily:FD,fontSize:26,color:BURNT,letterSpacing:"0.04em",margin:"0 0 18px",textTransform:"uppercase",borderTop:`1px solid ${BORDER}`,paddingTop:26}}>Knowledge Check</h2>
             {lesson.quizzes.map((q,i)=><Quiz key={i} quiz={q} idx={i}/>)}
@@ -1946,6 +1992,7 @@ function CUITrackApp(){
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(<CUITrackApp />);
+
 
   </script>
 </body>
