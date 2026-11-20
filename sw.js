@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cortexedge-cui-v2';
+const CACHE_NAME = 'cortexedge-cui-v3';
 const CORE = [
   './',
   './index.html',
